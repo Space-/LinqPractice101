@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -16,9 +17,12 @@ namespace LinqPractice101
         {
             LinqSamples samples = new LinqSamples();
 
-            //            samples.Linq1();
-            samples.Linq2();
+//            samples.Linq1();
+//            samples.Linq2();
+//            samples.Linq3();
+            samples.Linq4();
             Console.ReadKey();
+
         }
     }
 
@@ -35,13 +39,11 @@ namespace LinqPractice101
                 from n in numbers
                 where n < 5
                 select n;
-
-            Console.WriteLine("Numbers < 5:");
-            foreach (var num in lowNums)
+            Console.WriteLine("Numbers < 5");
+            foreach (var x in lowNums)
             {
-                Console.WriteLine(num);
+                Console.WriteLine(x);
             }
-
 
         }
 
@@ -52,9 +54,9 @@ namespace LinqPractice101
             List<Product> products = GetProductList();
 
             var soldOutProducts =
-                from prod in products
-                where prod.UnitsInStock == 0
-                select prod;
+                from p in products
+                where p.UnitsInStock == 0
+                select p;
 
             Console.WriteLine("Sold out products:");
             foreach (var product in soldOutProducts)
@@ -63,6 +65,44 @@ namespace LinqPractice101
             }
 
         }
+
+        [Description("This sample uses where to find all products that are in stock and cost more than 3.00 per unit.")]
+        public void Linq3()
+        {
+            List<Product> products = GetProductList();
+            var expensiveInStockProducts =
+                from p in products
+                where p.UnitsInStock > 0 && p.UnitPrice > 3.00M
+                select p;
+
+            Console.WriteLine("In-stock products that cost more than 3.00:");
+            foreach (var producut in products)
+            {
+                Console.WriteLine("{0} is in stock and costs more than 3.00.", producut.ProductName);
+            }
+        }
+
+        [Description("This sample uses where to find all customers in Washington and then uses the resulting sequence to drill down into their orders.")]
+        public void Linq4()
+        {
+            List<Customer> customers = GetCustomerList();
+
+            var waCustomers =
+                from c in customers
+                where c.Region == "WA"
+                select c;
+            
+            Console.WriteLine("Customers from Washington and their orders:");
+            foreach (var waCustomer in waCustomers)
+            {
+                Console.WriteLine("Customer {0}: {1}", waCustomer.CustomerID, waCustomer.CompanyName);
+                foreach (var order in waCustomer.Orders)
+                {
+                    Console.WriteLine("  Order: {0} : {1}", order.OrderID, order.OrderDate);
+                }
+            }
+        }
+       
 
         private List<Product> GetProductList()
         {
@@ -74,9 +114,21 @@ namespace LinqPractice101
             return productList;
         }
 
+        private List<Customer> GetCustomerList()
+        {
+            if (productList == null)
+            {
+                createLists();
+            }
+
+            return customerList;
+        }
+
         #region Create a productList and customer list
         private void createLists()
         {
+            #region productList
+
             // Product data created in-memory using collection initializer:
             productList =
                 new List<Product> {
@@ -159,6 +211,9 @@ namespace LinqPractice101
                 new Product { ProductID = 77, ProductName = "Original Frankfurter grüne Soße", Category = "Condiments", UnitPrice = 13.0000M, UnitsInStock = 32 }
             };
 
+            #endregion
+
+            #region customerList
             // Customer/Order data read into memory from XML file using XLinq:
             var folderPath = Directory.GetCurrentDirectory();
             const string xmlFileName = "Customers.xml";
@@ -188,10 +243,13 @@ namespace LinqPractice101
                                  Total = (decimal)o.Element("total")
                              })
                          .ToArray()
-                 })
-             .ToList();
+                 }).ToList();
+
+
+            #endregion
         }
         #endregion
+
     }
 
     public class Order
@@ -212,7 +270,7 @@ namespace LinqPractice101
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Fax { get; set; }
-        public object Orders { get; set; }
+        public Order[] Orders { get; set; }
     }
 
     public class Product
