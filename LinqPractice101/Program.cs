@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Xml.Linq;
 
 
@@ -17,12 +18,12 @@ namespace LinqPractice101
         {
             LinqSamples samples = new LinqSamples();
 
-//            samples.Linq1();
-//            samples.Linq2();
-//            samples.Linq3();
-            samples.Linq4();
+            //            samples.Linq1();
+            //            samples.Linq2();
+            //            samples.Linq3();
+            //            samples.Linq4();
+            samples.Linq5();
             Console.ReadKey();
-
         }
     }
 
@@ -91,7 +92,7 @@ namespace LinqPractice101
                 from c in customers
                 where c.Region == "WA"
                 select c;
-            
+
             Console.WriteLine("Customers from Washington and their orders:");
             foreach (var waCustomer in waCustomers)
             {
@@ -102,7 +103,29 @@ namespace LinqPractice101
                 }
             }
         }
-       
+
+        [Description("This sample demonstrates an indexed Where clause that returns digits whose name is shorter than their value.")]
+        public void Linq5()
+        {
+            string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            //            way1
+            //            var shortDigits =
+            //                from strDigit in digits
+            //                where strDigit.Length < Array.IndexOf(digits, strDigit)
+            //                select strDigit;
+
+            //            way2
+            //            var shortDigits = digits.Where(strDigit => strDigit.Length < Array.IndexOf(digits, strDigit));
+
+//            var shortDigits = digits.Where((strDigit, index) => strDigit.Length < index);
+
+            foreach (var d in shortDigits)
+            {
+                Console.WriteLine("The word '{0}' is shorter than its value.", d);
+            }
+        }
+
 
         private List<Product> GetProductList()
         {
