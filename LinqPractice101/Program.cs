@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Net.Sockets;
+using System.Xml.Linq;
+
+
+
 
 namespace LinqPractice101
 {
@@ -21,7 +25,7 @@ namespace LinqPractice101
     public class LinqSamples
     {
         private List<Product> productList;
-//        private List<Customer> customerList;
+        private List<Customer> customerList;
 
         [Description("This sample uses the where clause to find all elements of an array with a value less than 5.")]
         public void Linq1()
@@ -70,7 +74,7 @@ namespace LinqPractice101
             return productList;
         }
 
-        #region Create a productList
+        #region Create a productList and customer list
         private void createLists()
         {
             // Product data created in-memory using collection initializer:
@@ -154,8 +158,67 @@ namespace LinqPractice101
                 new Product { ProductID = 76, ProductName = "Lakkalikööri", Category = "Beverages", UnitPrice = 18.0000M, UnitsInStock = 57 },
                 new Product { ProductID = 77, ProductName = "Original Frankfurter grüne Soße", Category = "Condiments", UnitPrice = 13.0000M, UnitsInStock = 32 }
             };
+
+//            C: \Users\bruce.kao38\Source\Repos\LinqPractice101\LinqPractice101\bin\Debug\netcoreapp2.1\Customers.xml
+
+              // Customer/Order data read into memory from XML file using XLinq:
+
+              var folderPath = Directory.GetCurrentDirectory();
+              var XMLFileName = "Customers.xml";
+              var XMLFilePath = folderPath + "\\" + XMLFileName;
+              var folderName =
+                  Path.GetDirectoryName(folderPath);
+              Console.WriteLine(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())));
+              Console.ReadKey();
+               customerList = (
+                
+                    from e in XDocument.Load(XMLFilePath).
+                        Root.Elements("customer")
+                    select new Customer
+                    {
+                        CustomerID = (string)e.Element("id"),
+                        CompanyName = (string)e.Element("name"),
+                        Address = (string)e.Element("address"),
+                        City = (string)e.Element("city"),
+                        Region = (string)e.Element("region"),
+                        PostalCode = (string)e.Element("postalcode"),
+                        Country = (string)e.Element("country"),
+                        Phone = (string)e.Element("phone"),
+                        Fax = (string)e.Element("fax"),
+                        Orders = (
+                                from o in e.Elements("orders").Elements("order")
+                                select new Order
+                                {
+                                    OrderID = (int)o.Element("id"),
+                                    OrderDate = (DateTime)o.Element("orderdate"),
+                                    Total = (decimal)o.Element("total")
+                                })
+                            .ToArray()
+                    })
+                .ToList();
         }
         #endregion
+    }
+
+    public class Order
+    {
+        public int OrderID { get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal Total { get; set; }
+    }
+
+    public class Customer
+    {
+        public string CustomerID { get; set; }
+        public string CompanyName { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Region { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
+        public string Phone { get; set; }
+        public string Fax { get; set; }
+        public object Orders { get; set; }
     }
 
     public class Product
