@@ -15,8 +15,8 @@ namespace LinqPractice101
         static void Main(string[] args)
         {
             LinqSamples samples = new LinqSamples();
-            
-//            samples.Linq1();
+
+            //            samples.Linq1();
             samples.Linq2();
             Console.ReadKey();
         }
@@ -35,7 +35,7 @@ namespace LinqPractice101
                 from n in numbers
                 where n < 5
                 select n;
-            
+
             Console.WriteLine("Numbers < 5:");
             foreach (var num in lowNums)
             {
@@ -159,43 +159,40 @@ namespace LinqPractice101
                 new Product { ProductID = 77, ProductName = "Original Frankfurter grüne Soße", Category = "Condiments", UnitPrice = 13.0000M, UnitsInStock = 32 }
             };
 
-//            C: \Users\bruce.kao38\Source\Repos\LinqPractice101\LinqPractice101\bin\Debug\netcoreapp2.1\Customers.xml
+            // Customer/Order data read into memory from XML file using XLinq:
+            var folderPath = Directory.GetCurrentDirectory();
+            var XMLFileName = "Customers.xml";
+            var XMLFilePath = folderPath + "\\" + XMLFileName;
+            var folderName =
+                Path.GetDirectoryName(folderPath);
+            Console.WriteLine(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())));
+            Console.ReadKey();
+            customerList = (
 
-              // Customer/Order data read into memory from XML file using XLinq:
-
-              var folderPath = Directory.GetCurrentDirectory();
-              var XMLFileName = "Customers.xml";
-              var XMLFilePath = folderPath + "\\" + XMLFileName;
-              var folderName =
-                  Path.GetDirectoryName(folderPath);
-              Console.WriteLine(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())));
-              Console.ReadKey();
-               customerList = (
-                
-                    from e in XDocument.Load(XMLFilePath).
-                        Root.Elements("customer")
-                    select new Customer
-                    {
-                        CustomerID = (string)e.Element("id"),
-                        CompanyName = (string)e.Element("name"),
-                        Address = (string)e.Element("address"),
-                        City = (string)e.Element("city"),
-                        Region = (string)e.Element("region"),
-                        PostalCode = (string)e.Element("postalcode"),
-                        Country = (string)e.Element("country"),
-                        Phone = (string)e.Element("phone"),
-                        Fax = (string)e.Element("fax"),
-                        Orders = (
-                                from o in e.Elements("orders").Elements("order")
-                                select new Order
-                                {
-                                    OrderID = (int)o.Element("id"),
-                                    OrderDate = (DateTime)o.Element("orderdate"),
-                                    Total = (decimal)o.Element("total")
-                                })
-                            .ToArray()
-                    })
-                .ToList();
+                 from e in XDocument.Load(XMLFilePath).
+                     Root.Elements("customer")
+                 select new Customer
+                 {
+                     CustomerID = (string)e.Element("id"),
+                     CompanyName = (string)e.Element("name"),
+                     Address = (string)e.Element("address"),
+                     City = (string)e.Element("city"),
+                     Region = (string)e.Element("region"),
+                     PostalCode = (string)e.Element("postalcode"),
+                     Country = (string)e.Element("country"),
+                     Phone = (string)e.Element("phone"),
+                     Fax = (string)e.Element("fax"),
+                     Orders = (
+                             from o in e.Elements("orders").Elements("order")
+                             select new Order
+                             {
+                                 OrderID = (int)o.Element("id"),
+                                 OrderDate = (DateTime)o.Element("orderdate"),
+                                 Total = (decimal)o.Element("total")
+                             })
+                         .ToArray()
+                 })
+             .ToList();
         }
         #endregion
     }
