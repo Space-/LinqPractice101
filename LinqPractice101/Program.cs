@@ -161,15 +161,12 @@ namespace LinqPractice101
 
             // Customer/Order data read into memory from XML file using XLinq:
             var folderPath = Directory.GetCurrentDirectory();
-            var XMLFileName = "Customers.xml";
-            var XMLFilePath = folderPath + "\\" + XMLFileName;
-            var folderName =
-                Path.GetDirectoryName(folderPath);
-            Console.WriteLine(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())));
-            Console.ReadKey();
+            const string xmlFileName = "Customers.xml";
+            var xmlFilePath = folderPath + "\\..\\..\\..\\" + xmlFileName;
+
             customerList = (
 
-                 from e in XDocument.Load(XMLFilePath).
+                 from e in XDocument.Load(xmlFilePath).
                      Root.Elements("customer")
                  select new Customer
                  {
