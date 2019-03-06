@@ -118,7 +118,8 @@ namespace LinqPractice101
             //            way2
             //            var shortDigits = digits.Where(strDigit => strDigit.Length < Array.IndexOf(digits, strDigit));
 
-//            var shortDigits = digits.Where((strDigit, index) => strDigit.Length < index);
+            // way3
+            var shortDigits = digits.Where((strDigit, index) => strDigit.Length < index);
 
             foreach (var d in shortDigits)
             {
