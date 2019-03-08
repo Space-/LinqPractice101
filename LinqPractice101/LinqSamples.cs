@@ -214,7 +214,7 @@ namespace LinqPractice101
             };
         }
 
-        private List<Customer> GetProductListFromRawData()
+        private List<Customer> GetCustomerListFromXML()
         {
             // Customer/Order data read into memory from XML file using XLinq:
             var folderPath = Directory.GetCurrentDirectory();
