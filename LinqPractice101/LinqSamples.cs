@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -128,6 +129,25 @@ namespace LinqPractice101
         {
             productList = GetProductListFromRawData();
             customerList = GetCustomerListFromXML();
+        }
+
+        protected DataTable CreateProductList()
+        {
+            DataTable table = new DataTable("Products");
+            table.Columns.Add("ProductID", typeof(int));
+            table.Columns.Add("ProductName", typeof(string));
+            table.Columns.Add("Category", typeof(string));
+            table.Columns.Add("UnitPrice", typeof(decimal));
+            table.Columns.Add("UnitsInStock", typeof(int));
+
+            productList = GetProductListFromRawData();
+
+            foreach (var p in productList)
+            {
+                table.Rows.Add(p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+            }
+
+            return table;
         }
 
         // Product data created in-memory using collection initializer:
