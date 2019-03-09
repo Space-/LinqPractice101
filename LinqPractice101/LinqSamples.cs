@@ -104,6 +104,38 @@ namespace LinqPractice101
             }
         }
 
+        [Description("This sample uses select to produce a sequence of ints one higher than" +
+                     "those in an existing array of ints")]
+        public void Linq6()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var numPlusOne =
+                from n in numbers
+                select n + 1;
+
+            Console.WriteLine("Number + 1");
+            foreach (var i in numPlusOne)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
+        [Description("This sample uses select to return a sequence of just the names of a list of products.")]
+        public void Linq7()
+        {
+            List<Product> products = GetProductList();
+
+            var productNames =
+                from p in products
+                select p.ProductName;
+
+            Console.WriteLine("Product Names:");
+            foreach (var pName in productNames)
+            {
+                Console.WriteLine(pName);
+            }
+        }
+
         private List<Product> GetProductList()
         {
             if (productList == null)

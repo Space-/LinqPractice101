@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Security.Cryptography;
 
 namespace LinqPractice101
 {
@@ -14,7 +12,11 @@ namespace LinqPractice101
             //            samples.Linq2();
             //            samples.Linq3();
             //            samples.Linq4();
-            samples.Linq5();
+            //            samples.Linq5();
+
+            //            samples.Linq6();
+
+            samples.Linq7();
             Console.ReadKey();
         }
     }
