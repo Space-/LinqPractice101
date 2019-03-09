@@ -13,129 +13,6 @@ namespace LinqPractice101
         private List<Product> productList;
         private List<Customer> customerList;
 
-        [Description("This sample uses the where clause to find all elements of an array with a value less than 5.")]
-        public void Linq1()
-        {
-            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
-            var lowNums =
-                from n in numbers
-                where n < 5
-                select n;
-            Console.WriteLine("Numbers < 5");
-            foreach (var x in lowNums)
-            {
-                Console.WriteLine(x);
-            }
-        }
-
-        [Description("This sample uses the where clause to find all products that are out of stock.")]
-        public void Linq2()
-        {
-            List<Product> products = GetProductList();
-
-            var soldOutProducts =
-                from p in products
-                where p.UnitsInStock == 0
-                select p;
-
-            Console.WriteLine("Sold out products:");
-            foreach (var product in soldOutProducts)
-            {
-                Console.WriteLine("{0} is sold out!", product.ProductName);
-            }
-        }
-
-        [Description("This sample uses where to find all products that are in stock and cost more than 3.00 per unit.")]
-        public void Linq3()
-        {
-            List<Product> products = GetProductList();
-            var expensiveInStockProducts =
-                from p in products
-                where p.UnitsInStock > 0 && p.UnitPrice > 3.00M
-                select p;
-
-            Console.WriteLine("In-stock products that cost more than 3.00:");
-            foreach (var producut in products)
-            {
-                Console.WriteLine("{0} is in stock and costs more than 3.00.", producut.ProductName);
-            }
-        }
-
-        [Description("This sample uses where to find all customers in Washington and then uses the resulting sequence to drill down into their orders.")]
-        public void Linq4()
-        {
-            List<Customer> customers = GetCustomerList();
-
-            var waCustomers =
-                from c in customers
-                where c.Region == "WA"
-                select c;
-
-            Console.WriteLine("Customers from Washington and their orders:");
-            foreach (var waCustomer in waCustomers)
-            {
-                Console.WriteLine("Customer {0}: {1}", waCustomer.CustomerID, waCustomer.CompanyName);
-                foreach (var order in waCustomer.Orders)
-                {
-                    Console.WriteLine("  Order: {0} : {1}", order.OrderID, order.OrderDate);
-                }
-            }
-        }
-
-        [Description("This sample demonstrates an indexed Where clause that returns digits whose name is shorter than their value.")]
-        public void Linq5()
-        {
-            string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
-
-            //            way1
-            //            var shortDigits =
-            //                from strDigit in digits
-            //                where strDigit.Length < Array.IndexOf(digits, strDigit)
-            //                select strDigit;
-
-            //            way2
-            //            var shortDigits = digits.Where(strDigit => strDigit.Length < Array.IndexOf(digits, strDigit));
-
-            var shortDigits = digits.Where((strDigit, index) => strDigit.Length < index);
-
-            foreach (var d in shortDigits)
-            {
-                Console.WriteLine("The word '{0}' is shorter than its value.", d);
-            }
-        }
-
-        [Description("This sample uses select to produce a sequence of ints one higher than" +
-                     "those in an existing array of ints")]
-        public void Linq6()
-        {
-            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
-            var numPlusOne =
-                from n in numbers
-                select n + 1;
-
-            Console.WriteLine("Number + 1");
-            foreach (var i in numPlusOne)
-            {
-                Console.WriteLine(i);
-            }
-        }
-
-        [Description("This sample uses select to return a sequence of just the names of a list of products.")]
-        public void Linq7()
-        {
-            List<Product> products = GetProductList();
-
-            var productNames =
-                from p in products
-                select p.ProductName;
-
-            Console.WriteLine("Product Names:");
-            foreach (var pName in productNames)
-            {
-                Console.WriteLine(pName);
-            }
-        }
-
         private List<Product> GetProductList()
         {
             if (productList == null)
@@ -298,6 +175,152 @@ namespace LinqPractice101
                 }).ToList();
 
             return customerList;
+        }
+
+        [Description("This sample uses the where clause to find all elements of an array with a value less than 5.")]
+        public void Linq1()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var lowNums =
+                from n in numbers
+                where n < 5
+                select n;
+            Console.WriteLine("Numbers < 5");
+            foreach (var x in lowNums)
+            {
+                Console.WriteLine(x);
+            }
+        }
+
+        [Description("This sample uses the where clause to find all products that are out of stock.")]
+        public void Linq2()
+        {
+            List<Product> products = GetProductList();
+
+            var soldOutProducts =
+                from p in products
+                where p.UnitsInStock == 0
+                select p;
+
+            Console.WriteLine("Sold out products:");
+            foreach (var product in soldOutProducts)
+            {
+                Console.WriteLine("{0} is sold out!", product.ProductName);
+            }
+        }
+
+        [Description("This sample uses where to find all products that are in stock and cost more than 3.00 per unit.")]
+        public void Linq3()
+        {
+            List<Product> products = GetProductList();
+            var expensiveInStockProducts =
+                from p in products
+                where p.UnitsInStock > 0 && p.UnitPrice > 3.00M
+                select p;
+
+            Console.WriteLine("In-stock products that cost more than 3.00:");
+            foreach (var producut in products)
+            {
+                Console.WriteLine("{0} is in stock and costs more than 3.00.", producut.ProductName);
+            }
+        }
+
+        [Description("This sample uses where to find all customers in Washington and then uses the resulting sequence to drill down into their orders.")]
+        public void Linq4()
+        {
+            List<Customer> customers = GetCustomerList();
+
+            var waCustomers =
+                from c in customers
+                where c.Region == "WA"
+                select c;
+
+            Console.WriteLine("Customers from Washington and their orders:");
+            foreach (var waCustomer in waCustomers)
+            {
+                Console.WriteLine("Customer {0}: {1}", waCustomer.CustomerID, waCustomer.CompanyName);
+                foreach (var order in waCustomer.Orders)
+                {
+                    Console.WriteLine("  Order: {0} : {1}", order.OrderID, order.OrderDate);
+                }
+            }
+        }
+
+        [Description("This sample demonstrates an indexed Where clause that returns digits whose name is shorter than their value.")]
+        public void Linq5()
+        {
+            string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            //            way1
+            //            var shortDigits =
+            //                from strDigit in digits
+            //                where strDigit.Length < Array.IndexOf(digits, strDigit)
+            //                select strDigit;
+
+            //            way2
+            //            var shortDigits = digits.Where(strDigit => strDigit.Length < Array.IndexOf(digits, strDigit));
+
+            var shortDigits = digits.Where((strDigit, index) => strDigit.Length < index);
+
+            foreach (var d in shortDigits)
+            {
+                Console.WriteLine("The word '{0}' is shorter than its value.", d);
+            }
+        }
+
+        [Description("This sample uses select to produce a sequence of ints one higher than" +
+                     "those in an existing array of ints")]
+        public void Linq6()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            //            var numPlusOne =
+            //                from n in numbers
+            //                select n + 1;
+
+            var numPlusOne = numbers.Select(n => n + 1);
+
+            Console.WriteLine("Number + 1");
+            foreach (var i in numPlusOne)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
+        [Description("This sample uses select to return a sequence of just the names of a list of products.")]
+        public void Linq7()
+        {
+            List<Product> products = GetProductList();
+
+            //            var productNames =
+            //                from p in products
+            //                select p.ProductName;
+
+            var productNames = products.Select(p => p.ProductName);
+
+            Console.WriteLine("Product Names:");
+            foreach (var pName in productNames)
+            {
+                Console.WriteLine(pName);
+            }
+        }
+
+        [Description("This sample uses select to produce a sequence of strings representing the text version of a sequence of ints.")]
+        public void Linq8()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            string[] strings = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            //            var textNums =
+            //                from n in numbers
+            //                select strings[n];
+
+            var textNums = numbers.Select(n => strings[n]);
+
+            Console.WriteLine("Number strings:");
+            foreach (var s in textNums)
+            {
+                Console.WriteLine(s);
+            }
         }
     }
 }
