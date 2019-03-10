@@ -16,7 +16,11 @@ namespace LinqPractice101
 
             //            samples.Linq6();
             //            samples.Linq7();
-            samples.Linq8();
+            //            samples.Linq8();
+            //            samples.Linq9();
+            //            samples.Linq10();
+            samples.Linq11();
+
             Console.ReadKey();
         }
     }

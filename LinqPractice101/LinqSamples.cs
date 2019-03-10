@@ -322,5 +322,57 @@ namespace LinqPractice101
                 Console.WriteLine(s);
             }
         }
+
+        [Description("This sample uses select to produce a sequence of the uppercase and lowercase versions of each word in the original array.")]
+        public void Linq9()
+        {
+            string[] words = { "aPPLE", "BlUeBeRrY", "cHeRry" };
+
+            //            var upperLowerWords =
+            //                from w in words
+            //                select new { Upper = w.ToUpper(), Lower = w.ToLower() };
+            var upperLowerWords = words.Select(w => new { Upper = w.ToUpper(), Lower = w.ToLower() });
+
+            foreach (var ul in upperLowerWords)
+            {
+                Console.WriteLine("Uppercase: {0}, Lowercase: {1}", ul.Upper, ul.Lower);
+            }
+        }
+
+        [Description("This sample uses select to produce a sequence containing text representations of digits and whether their length is even or odd.")]
+        public void Linq10()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            string[] strings = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            //            var digitOddEvens =
+            //                from n in numbers
+            //                select new { Digit = strings[n], Even = (n % 2 == 0) ? "even" : "odd" };
+
+            var digitOddEvens = numbers.Select(n => new { Digit = strings[n], Even = (n % 2 == 0) ? "even" : "odd" });
+
+            foreach (var d in digitOddEvens)
+            {
+                Console.WriteLine("The digit {0} is {1}.", d.Digit, d.Even);
+            }
+        }
+
+        [Description("This sample uses select to produce a sequence containing some properties of Products, including UnitPrice which is renamed to Price in the resulting type.")]
+        public void Linq11()
+        {
+            List<Product> products = GetProductList();
+
+            //            var productList =
+            //                from p in products
+            //                select new { p.ProductName, p.Category, Price = p.UnitPrice };
+
+            var productInfos = products.Select(p => new { p.ProductName, p.Category, Price = p.UnitPrice });
+
+            Console.WriteLine("Product Info:");
+            foreach (var productInfo in productInfos)
+            {
+                Console.WriteLine("{0} is in the category {1} and costs {2} per unit.", productInfo.ProductName, productInfo.Category, productInfo.Price);
+            }
+        }
     }
 }
