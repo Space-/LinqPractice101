@@ -374,5 +374,29 @@ namespace LinqPractice101
                 Console.WriteLine("{0} is in the category {1} and costs {2} per unit.", productInfo.ProductName, productInfo.Category, productInfo.Price);
             }
         }
+
+        [Description("This sample uses an indexed Select clause to determine if the value of ints in an array match their position in the array.")]
+        public void Linq12()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            // way1 - by me
+            //            var i = 0;
+            //            var numsInPlace =
+            //                from n in numbers
+            //                select new { Num = n, InPlace = (i++ == n) };
+
+            // way2 - by me
+            //            var numsInPlace = numbers.Select(n => new { Num = n, InPlace = Array.IndexOf(numbers, n) == n });
+
+            // way3 - official code way
+            var numsInPlace = numbers.Select((n, index) => new { Num = n, InPlace = (n == index) });
+
+            Console.WriteLine("Number: In-Place?");
+            foreach (var n in numsInPlace)
+            {
+                Console.WriteLine("{0} : {1}", n.Num, n.InPlace);
+            }
+        }
     }
 }
