@@ -398,5 +398,27 @@ namespace LinqPractice101
                 Console.WriteLine("{0} : {1}", n.Num, n.InPlace);
             }
         }
+
+        [Description("This sample combines select and where to make a simple query that returns the text form of each digit less than 5.")]
+        public void Linq13()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            // way1
+            //            var lowNums =
+            //                from n in numbers
+            //                where n < 5
+            //                select digits[n];
+
+            // way2
+            var lowNums = numbers.Where(n => n < 5).Select(n => digits[n]);
+
+            Console.WriteLine("Numbers < 5");
+            foreach (var n in lowNums)
+            {
+                Console.WriteLine(n);
+            }
+        }
     }
 }
