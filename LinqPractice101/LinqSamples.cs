@@ -459,21 +459,44 @@ namespace LinqPractice101
         {
             List<Customer> customers = GetCustomerList();
 
-            //  way1 - official way
-            //            var orders =
-            //                from c in customers
-            //                from o in c.Orders
-            //                where o.Total < 500.00M
-            //                select new { c.CustomerID, o.OrderID, o.Total };
+            //  way1
+            var orders =
+                from c in customers
+                from o in c.Orders
+                where o.Total < 500.00M
+                select new { c.CustomerID, o.OrderID, o.Total };
 
-            // way2 - official way
-            var orders = customers.SelectMany(c => c.Orders, (c, o) => new { c, o })
-                .Where(@t => @t.o.Total < 500.00M)
-                .Select(@t => new { @t.c.CustomerID, @t.o.OrderID, @t.o.Total });
+            // way2
+            //            var orders = customers.SelectMany(c => c.Orders, (c, o) => new { c, o })
+            //                .Where(@t => @t.o.Total < 500.00M)
+            //                .Select(@t => new { @t.c.CustomerID, @t.o.OrderID, @t.o.Total });
 
             foreach (var order in orders)
             {
                 Console.WriteLine("CustomerID={0} OrderID={1}, Total={2}", order.CustomerID, order.OrderID, order.Total);
+            }
+        }
+
+        [Description("This sample uses a compound from clause to select all orders where the order was made in 1998 or later.")]
+        public void Linq16()
+        {
+            List<Customer> customers = GetCustomerList();
+
+            // way1
+            var orders =
+                from c in customers
+                from o in c.Orders
+                where o.OrderDate >= new DateTime(1998, 1, 1)
+                select new { c.CustomerID, o.OrderID, o.OrderDate };
+
+            // way2
+            //            var orders = customers.SelectMany(c => c.Orders, (c, o) => new { c, o })
+            //                .Where(@t => @t.o.OrderDate >= new DateTime(1998, 1, 1))
+            //                .Select(@t => new { @t.c.CustomerID, @t.o.OrderID, @t.o.OrderDate });
+
+            foreach (var order in orders)
+            {
+                Console.WriteLine("CustomerID={0} OrderID={1} OrderDate={2}", order.CustomerID, order.OrderID, order.OrderDate.ToString("M/d/yyyy"));
             }
         }
     }
