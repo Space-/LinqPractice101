@@ -453,5 +453,28 @@ namespace LinqPractice101
                 Console.WriteLine("{0} is less than {1}", pair.a, pair.b);
             }
         }
+
+        [Description("This sample uses a compound from clause to select all orders where the order total is less than 500.00.")]
+        public void Linq15()
+        {
+            List<Customer> customers = GetCustomerList();
+
+            //  way1 - official way
+            //            var orders =
+            //                from c in customers
+            //                from o in c.Orders
+            //                where o.Total < 500.00M
+            //                select new { c.CustomerID, o.OrderID, o.Total };
+
+            // way2 - official way
+            var orders = customers.SelectMany(c => c.Orders, (c, o) => new { c, o })
+                .Where(@t => @t.o.Total < 500.00M)
+                .Select(@t => new { @t.c.CustomerID, @t.o.OrderID, @t.o.Total });
+
+            foreach (var order in orders)
+            {
+                Console.WriteLine("CustomerID={0} OrderID={1}, Total={2}", order.CustomerID, order.OrderID, order.Total);
+            }
+        }
     }
 }
