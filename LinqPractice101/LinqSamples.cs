@@ -420,5 +420,38 @@ namespace LinqPractice101
                 Console.WriteLine(n);
             }
         }
+
+        [Description("This sample uses a compound from clause to make a query that returns all pairs of numbers from both arrays such that the number from numbersA is less than the number from numbersB.")]
+        public void Linq14()
+        {
+            int[] numbersA = { 0, 2, 4, 5, 6, 8, 9 };
+            int[] numbersB = { 1, 3, 5, 7, 8 };
+
+            /*
+            // way1 - by me
+            var pairs = numbersA.Select(n => new { Num = n, GreaterNums = numbersB.Where(greaterNum => greaterNum > n).Select(greaterNum => greaterNum) });
+
+            Console.WriteLine("Pairs where a < b:");
+            foreach (var pair in pairs)
+            {
+                foreach (var greaterNum in pair.GreaterNums)
+                {
+                    Console.WriteLine("{0} is less than {1}", pair.Num, greaterNum);
+                }
+            }*/
+
+            // way2 - official way
+            var pairs =
+                from a in numbersA
+                from b in numbersB
+                where a < b
+                select new { a, b };
+
+            Console.WriteLine("Pairs where a < b:");
+            foreach (var pair in pairs)
+            {
+                Console.WriteLine("{0} is less than {1}", pair.a, pair.b);
+            }
+        }
     }
 }
