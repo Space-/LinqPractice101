@@ -499,5 +499,22 @@ namespace LinqPractice101
                 Console.WriteLine("CustomerID={0} OrderID={1} OrderDate={2}", order.CustomerID, order.OrderID, order.OrderDate.ToString("M/d/yyyy"));
             }
         }
+
+        [Description("This sample uses a compound from clause to select all orders where the order total is greater than 2000.00 and uses from assignment to avoid requesting the total twice.")]
+        public void Linq17()
+        {
+            var customers = GetCustomerList();
+
+            var orders =
+                from c in customers
+                from o in c.Orders
+                where o.Total >= 2000.0M
+                select new { c.CustomerID, o.OrderID, o.Total };
+
+            foreach (var order in orders)
+            {
+                Console.WriteLine("CustomerID={0} OrderID={1} Total={2}", order.CustomerID, order.OrderID, order.Total);
+            }
+        }
     }
 }
