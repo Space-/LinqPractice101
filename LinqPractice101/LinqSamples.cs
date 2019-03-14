@@ -505,15 +505,44 @@ namespace LinqPractice101
         {
             var customers = GetCustomerList();
 
-            var orders =
-                from c in customers
-                from o in c.Orders
-                where o.Total >= 2000.0M
-                select new { c.CustomerID, o.OrderID, o.Total };
+            //            var orders =
+            //                from c in customers
+            //                from o in c.Orders
+            //                where o.Total >= 2000.0M
+            //                select new { c.CustomerID, o.OrderID, o.Total };
+
+            var orders = customers.SelectMany(c => c.Orders, (c, o) => new { c, o })
+                .Where(@t => @t.o.Total >= 2000.0M)
+                .Select(@t => new { @t.c.CustomerID, @t.o.OrderID, @t.o.Total });
 
             foreach (var order in orders)
             {
                 Console.WriteLine("CustomerID={0} OrderID={1} Total={2}", order.CustomerID, order.OrderID, order.Total);
+            }
+        }
+
+        [Description("This sample uses multiple from clauses so that filtering on customers can be done before selecting their orders. This makes the query more efficient by not selecting and then discarding orders for customers outside of Washington.")]
+        public void Linq18()
+        {
+            var customers = GetCustomerList();
+
+            DateTime cutOffDate = new DateTime(1997, 1, 1);
+
+            //            var orders =
+            //                from c in customers
+            //                where c.Region == "WA"
+            //                from o in c.Orders
+            //                where o.OrderDate >= cutOffDate
+            //                select new { c.CustomerID, o.OrderID };
+
+            var orders = customers.Where(c => c.Region == "WA")
+                .SelectMany(c => c.Orders, (c, o) => new { c, o })
+                .Where(@t => @t.o.OrderDate >= cutOffDate)
+                .Select(@t => new { @t.c.CustomerID, @t.o.OrderID });
+
+            foreach (var o in orders)
+            {
+                Console.WriteLine("CustomerID={0} OrderID={1}", o.CustomerID, o.OrderID);
             }
         }
     }
