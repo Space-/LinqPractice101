@@ -545,5 +545,21 @@ namespace LinqPractice101
                 Console.WriteLine("CustomerID={0} OrderID={1}", o.CustomerID, o.OrderID);
             }
         }
+
+        [Description("This sample uses an indexed SelectMany clause to select all orders, while referring to customers by the order in which they are returned from the query.")]
+        public void Linq19()
+        {
+            var customers = GetCustomerList();
+
+            var customerOrders =
+                customers.SelectMany(
+                    (cust, custIndex) =>
+                        cust.Orders.Select(o => new { CustIndex = custIndex + 1, o.OrderID }));
+
+            foreach (var customerOrder in customerOrders)
+            {
+                Console.WriteLine("Customer #{0} has an order with OrderID {1}", customerOrder.CustIndex, customerOrder.OrderID);
+            }
+        }
     }
 }
