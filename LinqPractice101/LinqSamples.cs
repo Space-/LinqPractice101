@@ -561,5 +561,24 @@ namespace LinqPractice101
                 Console.WriteLine("Customer #{0} has an order with OrderID {1}", customerOrder.CustIndex, customerOrder.OrderID);
             }
         }
+
+        [Description("This sample uses Take to get only the first 3 elements of the array.")]
+        public void Linq20()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            // way1 - by using 'Where' and 'Select'
+            //            var first3Numbers = numbers.Where(n => Array.IndexOf(numbers, n) < 100).Select(n => n);
+
+            // way2 - by using 'Take'
+            var first3Numbers = numbers.Take(3);
+
+            Console.WriteLine("First 3 numbers:");
+
+            foreach (var n in first3Numbers)
+            {
+                Console.WriteLine(n);
+            }
+        }
     }
 }
