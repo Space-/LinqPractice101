@@ -601,5 +601,28 @@ namespace LinqPractice101
                 Console.WriteLine(n);
             }
         }
+
+        [Description("This sample uses Take to get the first 3 orders from customers in Washington.")]
+        public void Linq21()
+        {
+            List<Customer> customers = GetCustomerList();
+
+            var first3WAOrders = (
+                from c in customers
+                from o in c.Orders
+                where c.Region == "WA"
+                select new { c.CustomerID, o.OrderID, o.OrderDate })
+                .Take(3);
+
+            //            var first3WAOrders = customers.SelectMany(c => c.Orders, (c, o) => new { c, o })
+            //                .Where(@t => @t.c.Region == "WA")
+            //                .Select(@t => new { @t.c.CustomerID, @t.o.OrderID, @t.o.OrderDate }).Take(3);
+
+            Console.WriteLine("First 3 orders in WA:");
+            foreach (var order in first3WAOrders)
+            {
+                Console.WriteLine("CustomerID={0} OrderID={1} OrderDate={2:M/d/yy}", order.CustomerID, order.OrderID, order.OrderDate);
+            }
+        }
     }
 }
