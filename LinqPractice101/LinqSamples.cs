@@ -568,13 +568,34 @@ namespace LinqPractice101
             int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
 
             // way1 - by using 'Where' and 'Select'
-            //            var first3Numbers = numbers.Where(n => Array.IndexOf(numbers, n) < 100).Select(n => n);
+            //            var first3Numbers = numbers.Where(n => Array.IndexOf(numbers, n) < 3).Select(n => n);
 
             // way2 - by using 'Take'
             var first3Numbers = numbers.Take(3);
 
             Console.WriteLine("First 3 numbers:");
 
+            foreach (var n in first3Numbers)
+            {
+                Console.WriteLine(n);
+            }
+        }
+
+        [Description("This sample uses Take to get only the first N elements of the array.")]
+        public void Linq20_extend_by_me()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var numOfGetNumbersFromArray = numbers.Length + 100; // out of that array's range
+
+            // way1 - by using 'Where' and 'Select'
+            //            var first3Numbers = numbers.Where(n => Array.IndexOf(numbers, n) < numOfGetNumbersFromArray).Select(n => n);
+
+            // way2 - by using 'Take'
+            var first3Numbers = numbers.Take(numOfGetNumbersFromArray);
+
+            Console.WriteLine("First N numbers:");
+
+            // will show all elements in this array, and no exception occurred
             foreach (var n in first3Numbers)
             {
                 Console.WriteLine(n);
