@@ -621,7 +621,7 @@ namespace LinqPractice101
             Console.WriteLine("First 3 orders in WA:");
             foreach (var order in first3WAOrders)
             {
-                Console.WriteLine("CustomerID={0} OrderID={1} OrderDate={2:M/d/yy}", order.CustomerID, order.OrderID, order.OrderDate);
+                Console.WriteLine("CustomerID={0} OrderID={1} OrderDate={2:M/d/yyyy}", order.CustomerID, order.OrderID, order.OrderDate);
             }
         }
 
@@ -642,6 +642,27 @@ namespace LinqPractice101
             foreach (var n in allButFirst4Numbers)
             {
                 Console.WriteLine(n);
+            }
+        }
+
+        [Description("This sample uses Take to get all but the first 2 orders from customers in Washington.")]
+        public void Linq23()
+        {
+            List<Customer> customers = GetCustomerList();
+
+            var waOrders =
+                from c in customers
+                from o in c.Orders
+                where c.Region == "WA"
+                select new { c.CustomerID, o.OrderID, o.OrderDate };
+
+            var allButFirst2Orders = waOrders.Skip(2);
+
+            Console.WriteLine("All but first 2 orders in WA:");
+
+            foreach (var order in allButFirst2Orders)
+            {
+                Console.WriteLine("CustomerID={0} OrderID={1} OrderDate={2:M/d/yyyy}", order.CustomerID, order.OrderID, order.OrderDate);
             }
         }
     }
