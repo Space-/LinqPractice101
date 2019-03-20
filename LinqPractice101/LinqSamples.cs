@@ -624,5 +624,25 @@ namespace LinqPractice101
                 Console.WriteLine("CustomerID={0} OrderID={1} OrderDate={2:M/d/yy}", order.CustomerID, order.OrderID, order.OrderDate);
             }
         }
+
+        [Description("This sample uses Skip to get all but the first 4 elements of the array.")]
+        public void Linq22()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            // way1 - by using 'Where' and 'Select'
+            //            var subArrayStartIndex = 4;
+            //            var allButFirst4Numbers = numbers.Where(n => Array.IndexOf(numbers, n) >= subArrayStartIndex).Select(n => n);
+
+            // way2 - by using 'Skip'
+            var allButFirst4Numbers = numbers.Skip(4);
+
+            Console.WriteLine("All but first 4 numbers:");
+
+            foreach (var n in allButFirst4Numbers)
+            {
+                Console.WriteLine(n);
+            }
+        }
     }
 }
