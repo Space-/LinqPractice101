@@ -671,16 +671,36 @@ namespace LinqPractice101
         {
             int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
 
-            // way1
-            var firstNumberGreaterThan6 = numbers.First(n => n >= 6);
-            var firstNumbersLessThan6 = numbers.Where(n => Array.IndexOf(numbers, n) < Array.IndexOf(numbers, firstNumberGreaterThan6)).Select(n => n);
+            // way1 - by using 'First', 'Where' and 'Select'
+            //            var firstNumberGreaterThan6 = numbers.First(n => n >= 6);
+            //            var firstNumbersLessThan6 = numbers.Where(n => Array.IndexOf(numbers, n) < Array.IndexOf(numbers, firstNumberGreaterThan6)).Select(n => n);
 
             // way2
-            //            var firstNumbersLessThan6 = numbers.TakeWhile(n => n < 6);
+            var firstNumbersLessThan6 = numbers.TakeWhile(n => n < 6);
 
             Console.WriteLine("First numbers less than 6:");
 
             foreach (var n in firstNumbersLessThan6)
+            {
+                Console.WriteLine(n);
+            }
+        }
+
+        [Description("This sample uses TakeWhile to return elements starting from the beginning of the array until a number is hit that is less than its position in the array.")]
+        public void Linq25()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            // way1 - by using 'First', 'Where' and 'Select'
+            var firstNumLessThanSelfIndex = numbers.First(n => n < Array.IndexOf(numbers, n));
+            var firstSmallNumbers = numbers.Where(n => Array.IndexOf(numbers, n) < Array.IndexOf(numbers, firstNumLessThanSelfIndex)).Select(n => n);
+
+            // way2 - by using 'TakeWhile'
+            //            var firstSmallNumbers = numbers.TakeWhile((n, index) => n >= index);
+
+            Console.WriteLine("First numbers not less than their position:");
+
+            foreach (var n in firstSmallNumbers)
             {
                 Console.WriteLine(n);
             }
