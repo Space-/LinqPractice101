@@ -665,5 +665,25 @@ namespace LinqPractice101
                 Console.WriteLine("CustomerID={0} OrderID={1} OrderDate={2:M/d/yyyy}", order.CustomerID, order.OrderID, order.OrderDate);
             }
         }
+
+        [Description("This sample uses TakeWhile to return elements starting from the beginning of the array until a number is hit that is not less than 6.")]
+        public void Linq24()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            // way1
+            var firstNumberGreaterThan6 = numbers.First(n => n >= 6);
+            var firstNumbersLessThan6 = numbers.Where(n => Array.IndexOf(numbers, n) < Array.IndexOf(numbers, firstNumberGreaterThan6)).Select(n => n);
+
+            // way2
+            //            var firstNumbersLessThan6 = numbers.TakeWhile(n => n < 6);
+
+            Console.WriteLine("First numbers less than 6:");
+
+            foreach (var n in firstNumbersLessThan6)
+            {
+                Console.WriteLine(n);
+            }
+        }
     }
 }

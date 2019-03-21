@@ -33,7 +33,8 @@ namespace LinqPractice101
             //            samples.Linq20_extend_by_me();
             //            samples.Linq21();
             //            samples.Linq22();
-            samples.Linq23();
+            //            samples.Linq23();
+            samples.Linq24();
 
             Console.ReadKey();
         }
