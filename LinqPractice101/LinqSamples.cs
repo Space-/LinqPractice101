@@ -705,5 +705,29 @@ namespace LinqPractice101
                 Console.WriteLine(n);
             }
         }
+
+        [Description("This sample uses SkipWhile to get the elements of the array starting from the first element divisible by 3.")]
+        public void Linq26()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            // way1 - by using 'First', 'Where' and 'Select'
+            //            var indexOfFirstNumDivBy3 = numbers.First(n => n % 3 == 0);
+            //            var numbersOfDivBy3 = numbers.Where(n => Array.IndexOf(numbers, n) >= indexOfFirstNumDivBy3).Select(n => n);
+
+            // way2 - by using 'First', 'Where' and 'Skip'
+            //            var indexOfFirstNumDivBy3 = numbers.First(n => n % 3 == 0);
+            //            var numbersOfDivBy3 = numbers.Skip(indexOfFirstNumDivBy3);
+
+            // way3 - by using - 'SkipWhile'
+            var numbersOfDivBy3 = numbers.SkipWhile(n => n % 3 != 0);
+
+            Console.WriteLine("All elements starting from first element divisible by 3:");
+
+            foreach (var n in numbersOfDivBy3)
+            {
+                Console.WriteLine(n);
+            }
+        }
     }
 }
