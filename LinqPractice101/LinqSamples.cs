@@ -715,9 +715,10 @@ namespace LinqPractice101
             //            var indexOfFirstNumDivBy3 = numbers.First(n => n % 3 == 0);
             //            var numbersOfDivBy3 = numbers.Where(n => Array.IndexOf(numbers, n) >= indexOfFirstNumDivBy3).Select(n => n);
 
-            // way2 - by using 'First', 'Where' and 'Skip'
+            // way2 - by using 'First' and 'Skip'
             //            var indexOfFirstNumDivBy3 = numbers.First(n => n % 3 == 0);
-            //            var numbersOfDivBy3 = numbers.Skip(indexOfFirstNumDivBy3);
+            //            var toSkipCnt = indexOfFirstNumDivBy3;
+            //            var numbersOfDivBy3 = numbers.Skip(toSkipCnt);
 
             // way3 - by using - 'SkipWhile'
             var numbersOfDivBy3 = numbers.SkipWhile(n => n % 3 != 0);
@@ -725,6 +726,32 @@ namespace LinqPractice101
             Console.WriteLine("All elements starting from first element divisible by 3:");
 
             foreach (var n in numbersOfDivBy3)
+            {
+                Console.WriteLine(n);
+            }
+        }
+
+        [Description("This sample uses SkipWhile to get the elements of the array starting from the first element less than its position.")]
+        public void Linq27()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            // way1 - by using 'First' and 'Where'
+            //            var firstNumLessThanSelfIndex = numbers.First(n => n < Array.IndexOf(numbers, n));
+            //            var indexOfFirstNumLessThanSelfIndex = Array.IndexOf(numbers, firstNumLessThanSelfIndex);
+            //            var numbersLessThanSelfIndex = numbers.Where((n, index) => index >= indexOfFirstNumLessThanSelfIndex);
+
+            // way2 - by using 'First' and 'Skip'
+            //            var firstNumLessThanSelfIndex = numbers.First(n => n < Array.IndexOf(numbers, n));
+            //            var indexOfFirstNumLessThanSelfIndex = Array.IndexOf(numbers, firstNumLessThanSelfIndex);
+            //            var toSkipCnt = indexOfFirstNumLessThanSelfIndex;
+            //            var numbersLessThanSelfIndex = numbers.Skip(toSkipCnt);
+
+            // way3 - by using -'SkipWhile'
+            var numbersLessThanSelfIndex = numbers.SkipWhile((n, index) => n >= index);
+
+            Console.WriteLine("All elements starting from first element divisible by 3:");
+            foreach (var n in numbersLessThanSelfIndex)
             {
                 Console.WriteLine(n);
             }
