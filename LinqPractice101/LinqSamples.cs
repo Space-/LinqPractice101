@@ -775,5 +775,19 @@ namespace LinqPractice101
                 Console.WriteLine(w);
             }
         }
+
+        [Description("This sample uses orderby to sort a list of words by length.")]
+        public void Linq29()
+        {
+            string[] words = { "cherry", "apple", "blueberry" };
+
+            var sortedWordsByLength = words.OrderBy(n => n.Length);
+
+            Console.WriteLine("The sorted list of words (by length):");
+            foreach (var w in sortedWordsByLength)
+            {
+                Console.WriteLine(w);
+            }
+        }
     }
 }
