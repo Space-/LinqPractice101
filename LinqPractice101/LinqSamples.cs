@@ -789,5 +789,19 @@ namespace LinqPractice101
                 Console.WriteLine(w);
             }
         }
+
+        [Description("This sample uses orderby to sort a list of products by name.")]
+        public void Linq30()
+        {
+            List<Product> products = GetProductList();
+
+            var sortedProductsByName = products.OrderBy(n => n.ProductName);
+
+            foreach (var p in sortedProductsByName)
+            {
+                Console.WriteLine("ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                    p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+            }
+        }
     }
 }
