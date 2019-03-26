@@ -824,5 +824,24 @@ namespace LinqPractice101
                 return string.Compare(x, y, StringComparison.OrdinalIgnoreCase);
             }
         }
+
+        [Description("This sample uses orderby and descending to sort a list of doubles from highest to lowest.")]
+        public void Linq32()
+        {
+            double[] decimalsNumbers = { 1.7, 2.3, 1.9, 4.1, 2.9 };
+
+            //            var sortedDecimalsNumbersByDesc =
+            //                from d in decimalsNumbers
+            //                orderby d descending
+            //                select d;
+
+            var sortedDecimalsNumbersByDesc = decimalsNumbers.OrderByDescending(d => d);
+
+            Console.WriteLine("The decimals numbers from highest to lowest:");
+            foreach (var d in sortedDecimalsNumbersByDesc)
+            {
+                Console.WriteLine(d);
+            }
+        }
     }
 }
