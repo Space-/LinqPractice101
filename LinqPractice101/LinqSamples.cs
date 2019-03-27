@@ -857,5 +857,18 @@ namespace LinqPractice101
                     p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
             }
         }
+
+        [Description("This sample uses an OrderBy clause with a custom comparer to do a case-insensitive descending sort of the words in an array.")]
+        public void Linq34()
+        {
+            string[] words = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+
+            var sortedWordsCaseInsensitiveByDesc = words.OrderByDescending(w => w, new CaseInsensitiveComparer());
+
+            foreach (var w in sortedWordsCaseInsensitiveByDesc)
+            {
+                Console.WriteLine(w);
+            }
+        }
     }
 }
