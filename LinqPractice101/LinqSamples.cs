@@ -843,5 +843,19 @@ namespace LinqPractice101
                 Console.WriteLine(d);
             }
         }
+
+        [Description("This sample uses orderby to sort a list of products by units in stock from highest to lowest.")]
+        public void Linq33()
+        {
+            List<Product> products = GetProductList();
+
+            var sortedProductsByDesc = products.OrderByDescending(p => p.UnitsInStock);
+
+            foreach (var p in sortedProductsByDesc)
+            {
+                Console.WriteLine("ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                    p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+            }
+        }
     }
 }
