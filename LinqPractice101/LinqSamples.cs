@@ -881,12 +881,25 @@ namespace LinqPractice101
             //                orderby d.Length, d
             //                select d;
 
-            var sortedDigitsByLengthAndAlphabet = digits.OrderBy(d => d.Length).ThenBy(d => d);
+            var sortedDigitsByLengthThenByAlphabet = digits.OrderBy(d => d.Length).ThenBy(d => d);
 
             Console.WriteLine("Sorted digits:");
-            foreach (var d in sortedDigitsByLengthAndAlphabet)
+            foreach (var d in sortedDigitsByLengthThenByAlphabet)
             {
                 Console.WriteLine(d);
+            }
+        }
+
+        [Description("This sample uses an OrderBy and a ThenBy clause with a custom comparer to sort first by word length and then by a case-insensitive sort of the words in an array.")]
+        public void Linq36()
+        {
+            string[] words = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+
+            var sortedWordsByLengthAndAlphabet = words.OrderBy(w => w.Length).ThenBy(w => w, new CaseInsensitiveComparer());
+
+            foreach (var w in sortedWordsByLengthAndAlphabet)
+            {
+                Console.WriteLine(w);
             }
         }
     }
