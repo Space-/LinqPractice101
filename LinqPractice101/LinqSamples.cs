@@ -870,5 +870,24 @@ namespace LinqPractice101
                 Console.WriteLine(w);
             }
         }
+
+        [Description("This sample uses a compound orderby to sort a list of digits, first by length of their name, and then alphabetically by the name itself.")]
+        public void Linq35()
+        {
+            string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            //            var sortedDigitsByLengthAndAlphabet =
+            //                from d in digits
+            //                orderby d.Length, d
+            //                select d;
+
+            var sortedDigitsByLengthAndAlphabet = digits.OrderBy(d => d.Length).ThenBy(d => d);
+
+            Console.WriteLine("Sorted digits:");
+            foreach (var d in sortedDigitsByLengthAndAlphabet)
+            {
+                Console.WriteLine(d);
+            }
+        }
     }
 }
