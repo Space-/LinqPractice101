@@ -917,5 +917,19 @@ namespace LinqPractice101
                     p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
             }
         }
+
+        [Description("This sample uses an OrderBy and a ThenBy clause with a custom comparer to sort first by word length and then by a case-insensitive descending sort of the words in an array.")]
+        public void Linq38()
+        {
+            string[] words = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+
+            var sortedWordsByLengthThenByAlphabetCaseInsensitive =
+                words.OrderBy(w => w.Length).ThenByDescending(w => w, new CaseInsensitiveComparer());
+
+            foreach (var w in sortedWordsByLengthThenByAlphabetCaseInsensitive)
+            {
+                Console.WriteLine(w);
+            }
+        }
     }
 }
