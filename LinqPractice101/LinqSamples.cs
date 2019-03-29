@@ -931,5 +931,20 @@ namespace LinqPractice101
                 Console.WriteLine(w);
             }
         }
+
+        [Description("This sample uses Reverse to create a list of all digits in the array whose second letter is 'i' that is reversed from the order in the original array.")]
+        public void Linq39()
+        {
+            string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            var reversedIDigits = digits.Where(str => str[1].Equals('i')).Reverse();
+
+            Console.WriteLine("A backwards list of the digits with a second character of 'i'");
+
+            foreach (var reversedIDigit in reversedIDigits)
+            {
+                Console.WriteLine(reversedIDigit);
+            }
+        }
     }
 }
