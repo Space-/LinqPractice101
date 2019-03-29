@@ -902,5 +902,20 @@ namespace LinqPractice101
                 Console.WriteLine(w);
             }
         }
+
+        [Description("This sample uses a compound orderby to sort a list of products, first by category, and then by unit price, from highest to lowest.")]
+        public void Linq37()
+        {
+            List<Product> products = GetProductList();
+
+            var sortedProductsByCategoryThenByUnitPriceDesc =
+                products.OrderBy(p => p.Category).ThenByDescending(p => p.UnitPrice);
+
+            foreach (var p in sortedProductsByCategoryThenByUnitPriceDesc)
+            {
+                Console.WriteLine("ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                    p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+            }
+        }
     }
 }
