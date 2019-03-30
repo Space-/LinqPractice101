@@ -946,5 +946,28 @@ namespace LinqPractice101
                 Console.WriteLine(reversedIDigit);
             }
         }
+
+        [Description("This sample uses group by to partition a list of numbers by their remainder when divided by 5.")]
+        public void Linq40()
+        {
+            int divisor = 5;
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            //            var numberGroups =
+            //                from n in numbers
+            //                group n by n % divisor into g
+            //                select new { Remainder = g.Key, Numbers = g };
+
+            var numberGroups = numbers.GroupBy(n => n % divisor).Select(g => new { Remainder = g.Key, Numbers = g });
+
+            foreach (var g in numberGroups)
+            {
+                Console.WriteLine("Numbers with a remainder of {0} when divided by {1}", g.Remainder, divisor);
+                foreach (var number in g.Numbers)
+                {
+                    Console.WriteLine(number);
+                }
+            }
+        }
     }
 }
