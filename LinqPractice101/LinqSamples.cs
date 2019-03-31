@@ -969,5 +969,26 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses group by to partition a list of words by their first letter.")]
+        public void Linq41()
+        {
+            string[] words = { "blueberry", "chimpanzee", "abacus", "banana", "apple", "cheese" };
+            //            var wordGroups =
+            //                from w in words
+            //                group w by w[0] into g
+            //                select new { FirstLetter = g.Key, Words = g };
+
+            var wordGroups = words.GroupBy(w => w[0]).Select(g => new { FirstLetter = g.Key, Words = g });
+
+            foreach (var g in wordGroups)
+            {
+                Console.WriteLine("Words that start with the letter '{0}'", g.FirstLetter);
+                foreach (var word in g.Words)
+                {
+                    Console.WriteLine(word);
+                }
+            }
+        }
     }
 }
