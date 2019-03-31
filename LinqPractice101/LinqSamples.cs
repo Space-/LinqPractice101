@@ -990,5 +990,28 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses group by to partition a list of products by category.")]
+        public void Linq42()
+        {
+            var productList = GetProductList();
+
+            //            var orderGroups =
+            //                from p in productList
+            //                group p by p.Category into g
+            //                select new { Category = g.Key, Products = g };
+
+            var orderGroups = productList.GroupBy(p => p.Category).Select(g => new { Category = g.Key, Products = g });
+
+            foreach (var orderGroup in orderGroups)
+            {
+                Console.WriteLine("Category={0} Products=...", orderGroup.Category);
+                foreach (var p in orderGroup.Products)
+                {
+                    Console.WriteLine("Products:ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                        p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+                }
+            }
+        }
     }
 }
