@@ -1013,5 +1013,48 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses group by to partition a list of each customer's orders, first by year, and then by month.")]
+        public void Linq43()
+        {
+            List<Customer> customers = GetCustomerList();
+
+            var customerOrderGroups =
+                from c in customers
+                select
+                    new
+                    {
+                        c.CompanyName,
+                        YearGroups =
+                            from o in c.Orders
+                            group o by o.OrderDate.Year into yearGroup
+                            select
+                                new
+                                {
+                                    Year = yearGroup.Key,
+                                    MonthGroups =
+                                        from o in yearGroup
+                                        group o by o.OrderDate.Month into monthGroup
+                                        select new { Month = monthGroup.Key, Orders = monthGroup }
+                                }
+                    };
+
+            foreach (var customerOrderGroup in customerOrderGroups)
+            {
+                Console.WriteLine("CompanyName={0}=...", customerOrderGroup.CompanyName);
+                foreach (var yearGroup in customerOrderGroup.YearGroups)
+                {
+                    Console.WriteLine("YearGroups:Year={0} MonthGroups=...", yearGroup.Year);
+                    foreach (var monthGroup in yearGroup.MonthGroups)
+                    {
+                        Console.WriteLine("MonthGroups: Month={0} Orders", monthGroup.Month);
+                        foreach (var month in monthGroup.Orders)
+                        {
+                            Console.WriteLine("OrderID={0} OrderDate={1:MM/dd/yyyy} Total={2}", month.OrderID, month.OrderDate, month.Total);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
