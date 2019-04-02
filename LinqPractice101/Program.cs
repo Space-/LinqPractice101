@@ -54,7 +54,8 @@ namespace LinqPractice101
             //            samples.Linq40();
             //            samples.Linq41();
             //            samples.Linq42();
-            samples.Linq43();
+            //            samples.Linq43();
+            samples.Linq44();
 
             Console.ReadKey();
         }

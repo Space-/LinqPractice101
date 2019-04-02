@@ -1056,5 +1056,42 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses GroupBy to partition trimmed elements of an array using a custom comparer that matches words that are anagrams of each other.")]
+        public void Linq44()
+        {
+            string[] anagrams = { "from   ", " salt", " earn ", "  last   ", " near ", " form  " };
+
+            var orderGroups = anagrams.GroupBy(w => w.Trim(), new AnagramEqualityComparer()).Select(g => new { TrimWord = g.Key, Words = g });
+
+            foreach (var orderGroup in orderGroups)
+            {
+                Console.WriteLine("...");
+                foreach (var word in orderGroup.Words)
+                {
+                    Console.WriteLine(word.Trim());
+                }
+            }
+        }
+    }
+
+    public class AnagramEqualityComparer : IEqualityComparer<string>
+    {
+        public bool Equals(string x, string y)
+        {
+            return GetCanonicalString(x) == GetCanonicalString(y);
+        }
+
+        public int GetHashCode(string obj)
+        {
+            return GetCanonicalString(obj).GetHashCode();
+        }
+
+        private static string GetCanonicalString(string word)
+        {
+            char[] wordChars = word.ToCharArray();
+            Array.Sort<char>(wordChars);
+            return new string(wordChars);
+        }
     }
 }
