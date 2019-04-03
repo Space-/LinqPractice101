@@ -1073,6 +1073,23 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses GroupBy to partition trimmed elements of an array using a custom comparer that matches words that are anagrams of each other, and then converts the results to uppercase.")]
+        public void Linq45()
+        {
+            string[] anagrams = { "from   ", " salt", " earn ", "  last   ", " near ", " form  " };
+
+            var orderGroups = anagrams.GroupBy(w => w.Trim(), upperCaseWord => upperCaseWord.ToUpper(), new AnagramEqualityComparer()).Select(g => new { TrimWord = g.Key, UpperCaseWords = g });
+
+            foreach (var orderGroup in orderGroups)
+            {
+                Console.WriteLine("...");
+                foreach (var upperCaseWord in orderGroup.UpperCaseWords)
+                {
+                    Console.WriteLine(upperCaseWord.Trim());
+                }
+            }
+        }
     }
 
     public class AnagramEqualityComparer : IEqualityComparer<string>
