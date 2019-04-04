@@ -1091,6 +1091,26 @@ namespace LinqPractice101
             }
         }
 
+        public class AnagramEqualityComparer : IEqualityComparer<string>
+        {
+            public bool Equals(string x, string y)
+            {
+                return GetCanonicalString(x) == GetCanonicalString(y);
+            }
+
+            public int GetHashCode(string obj)
+            {
+                return GetCanonicalString(obj).GetHashCode();
+            }
+
+            private static string GetCanonicalString(string word)
+            {
+                char[] wordChars = word.ToCharArray();
+                Array.Sort<char>(wordChars);
+                return new string(wordChars);
+            }
+        }
+
         [Description("This sample uses Distinct to remove duplicate elements in a sequence of factors of 300.")]
         public void Linq46()
         {
@@ -1104,25 +1124,19 @@ namespace LinqPractice101
                 Console.WriteLine(uniqueNumber);
             }
         }
-    }
 
-    public class AnagramEqualityComparer : IEqualityComparer<string>
-    {
-        public bool Equals(string x, string y)
+        [Description("This sample uses Distinct to find the unique Category names.")]
+        public void Linq47()
         {
-            return GetCanonicalString(x) == GetCanonicalString(y);
-        }
+            List<Product> products = GetProductList();
 
-        public int GetHashCode(string obj)
-        {
-            return GetCanonicalString(obj).GetHashCode();
-        }
+            var uniqueCategoryNames = products.Select(p => p.Category).Distinct();
 
-        private static string GetCanonicalString(string word)
-        {
-            char[] wordChars = word.ToCharArray();
-            Array.Sort<char>(wordChars);
-            return new string(wordChars);
+            Console.WriteLine("Unique category names");
+            foreach (var uniqueCategoryName in uniqueCategoryNames)
+            {
+                Console.WriteLine(uniqueCategoryName);
+            }
         }
     }
 }
