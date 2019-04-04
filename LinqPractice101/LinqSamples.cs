@@ -1090,6 +1090,20 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses Distinct to remove duplicate elements in a sequence of factors of 300.")]
+        public void Linq46()
+        {
+            int[] numbers = { 2, 2, 3, 5, 5 };
+
+            var numberSet = numbers.Distinct();
+
+            Console.WriteLine("Distinct numbers:");
+            foreach (var uniqueNumber in numberSet)
+            {
+                Console.WriteLine(uniqueNumber);
+            }
+        }
     }
 
     public class AnagramEqualityComparer : IEqualityComparer<string>
