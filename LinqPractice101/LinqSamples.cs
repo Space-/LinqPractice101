@@ -1138,5 +1138,20 @@ namespace LinqPractice101
                 Console.WriteLine(uniqueCategoryName);
             }
         }
+
+        [Description("This sample uses Union to create one sequence that contains the unique values from both arrays.")]
+        public void Linq48()
+        {
+            int[] numbersA = { 0, 2, 4, 5, 6, 8, 9 };
+            int[] numbersB = { 1, 3, 5, 7, 8 };
+
+            var uniqueNumbers = numbersA.Union(numbersB);
+
+            Console.WriteLine("Unique numbers from both arrays:");
+            foreach (var uniqueNumber in uniqueNumbers)
+            {
+                Console.WriteLine(uniqueNumber);
+            }
+        }
     }
 }
