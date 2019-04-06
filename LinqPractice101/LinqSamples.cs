@@ -1153,5 +1153,22 @@ namespace LinqPractice101
                 Console.WriteLine(uniqueNumber);
             }
         }
+
+        [Description("This sample uses Union to create one sequence that contains the unique first letter from both product and customer names.")]
+        public void Linq49()
+        {
+            var products = GetProductList();
+            var custormers = GetCustomerList();
+
+            var productFirstChars = products.Select(p => p.ProductName[0]);
+            var custormerFirstChars = custormers.Select(p => p.CompanyName[0]);
+
+            var uniqueFirstChars = productFirstChars.Union(custormerFirstChars);
+
+            foreach (var uniqueFirstChar in uniqueFirstChars)
+            {
+                Console.WriteLine(uniqueFirstChar);
+            }
+        }
     }
 }
