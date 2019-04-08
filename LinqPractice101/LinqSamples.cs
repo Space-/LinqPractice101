@@ -1185,5 +1185,20 @@ namespace LinqPractice101
                 Console.WriteLine(commonNumber);
             }
         }
+
+        [Description("This sample uses Intersect to create one sequence that contains the common first letter from both product and customer names.")]
+        public void Linq51()
+        {
+            var products = GetProductList();
+            var customers = GetCustomerList();
+
+            var productFirstChars = products.Select(p => p.ProductName[0]);
+            var customerFirstChars = customers.Select(c => c.CompanyName[0]);
+
+            var commonFirstChars = productFirstChars.Intersect(customerFirstChars);
+
+            Console.WriteLine("Conmmon first letters from Product names and Customer names:");
+            commonFirstChars.ToList().ForEach(commonChar => Console.WriteLine(commonChar));
+        }
     }
 }
