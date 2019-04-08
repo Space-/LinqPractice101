@@ -1200,5 +1200,16 @@ namespace LinqPractice101
             Console.WriteLine("Conmmon first letters from Product names and Customer names:");
             commonFirstChars.ToList().ForEach(commonChar => Console.WriteLine(commonChar));
         }
+
+        [Description("This sample uses Except to create a sequence that contains the values from first number array that are not also in second number array.")]
+        public void Linq52()
+        {
+            int[] firstNumberArray = { 0, 2, 4, 5, 6, 8, 9 };
+            int[] secondNumberArray = { 1, 3, 5, 7, 8 };
+
+            var numbersOnlyInFirstArray = firstNumberArray.Except(secondNumberArray);
+            Console.WriteLine("Numbers in first array but not second array:");
+            numbersOnlyInFirstArray.ToList().ForEach(Console.WriteLine);
+        }
     }
 }
