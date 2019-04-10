@@ -1227,5 +1227,21 @@ namespace LinqPractice101
             Console.WriteLine("First letters from Product names, but not from Customer names:");
             productOnlyFirstChars.ToList().ForEach(Console.WriteLine);
         }
+
+        [Description("This sample uses ToArray to immediately evaluate a sequence into an array.")]
+        public void Linq54()
+        {
+            double[] doubles = { 1.7, 2.3, 4.1, 1.9, 2.9 };
+
+            var sortedDoublesByDesc = doubles.OrderByDescending(d => d);
+
+            var doublesArrayByDesc = sortedDoublesByDesc.ToArray();
+
+            Console.WriteLine("Every other double from highest to lowest:");
+            for (int i = 0; i < doublesArrayByDesc.Length; i += 2)
+            {
+                Console.WriteLine(doublesArrayByDesc[i]);
+            }
+        }
     }
 }
