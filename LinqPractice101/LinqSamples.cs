@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Xml.Linq;
 
 namespace LinqPractice101
@@ -1210,6 +1211,21 @@ namespace LinqPractice101
             var numbersOnlyInFirstArray = firstNumberArray.Except(secondNumberArray);
             Console.WriteLine("Numbers in first array but not second array:");
             numbersOnlyInFirstArray.ToList().ForEach(Console.WriteLine);
+        }
+
+        [Description("This sample uses Except to create one sequence that contains the first letters of product names that are not also first letters of customer names.")]
+        public void Linq53()
+        {
+            var products = GetProductList();
+            var customers = GetCustomerList();
+
+            var productFirstChars = products.Select(p => p.ProductName[0]);
+            var customerFirstChars = customers.Select(c => c.CompanyName[0]);
+
+            var productOnlyFirstChars = productFirstChars.Except(customerFirstChars);
+
+            Console.WriteLine("First letters from Product names, but not from Customer names:");
+            productOnlyFirstChars.ToList().ForEach(Console.WriteLine);
         }
     }
 }
