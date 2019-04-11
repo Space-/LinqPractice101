@@ -1255,5 +1255,19 @@ namespace LinqPractice101
             Console.WriteLine("The sorted word list:");
             wordList.ForEach(Console.WriteLine);
         }
+
+        [Description("This sample uses ToDictionary to immediately evaluate a sequence and a related key expression into a dictionary.")]
+        public void Linq56()
+        {
+            var scoreRecords = new[]
+            {
+                new {Name="Alice", Score=50},
+                new {Name="Bob", Score=40},
+                new {Name="Cathy", Score=45},
+            };
+
+            var scoreRecordsDictionary = scoreRecords.ToDictionary(sr => sr.Name);
+            Console.WriteLine("Bob's score: {0}", scoreRecordsDictionary["Bob"]);
+        }
     }
 }
