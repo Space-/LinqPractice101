@@ -1243,5 +1243,17 @@ namespace LinqPractice101
                 Console.WriteLine(doublesArrayByDesc[i]);
             }
         }
+
+        [Description("This sample uses ToList to immediately evaluate a sequence into a List<T>.")]
+        public void Linq55()
+        {
+            string[] words = { "cherry", "apple", "blueberry" };
+
+            var sortedWords = words.OrderBy(w => w);
+            var wordList = sortedWords.ToList();
+
+            Console.WriteLine("The sorted word list:");
+            wordList.ForEach(Console.WriteLine);
+        }
     }
 }
