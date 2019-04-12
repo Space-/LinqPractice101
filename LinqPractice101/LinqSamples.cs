@@ -1269,5 +1269,27 @@ namespace LinqPractice101
             var scoreRecordsDictionary = scoreRecords.ToDictionary(sr => sr.Name);
             Console.WriteLine("Bob's score: {0}", scoreRecordsDictionary["Bob"]);
         }
+
+        [Description("This sample uses OfType to return only the elements of the array that are of type double.")]
+        public void Linq57()
+        {
+            object[] numbers = { null, 1.0, "two", 3, "four", 5, "six", 7.0, "#ABC" };
+
+            var doubles = numbers.OfType<double>();
+
+            Console.WriteLine("Numbers stored as doubles:");
+            doubles.ToList().ForEach(Console.WriteLine);
+        }
+
+        [Description("This sample uses First to return the first matching element as a Product, instead of as a sequence containing a Product.")]
+        public void Linq58()
+        {
+            var products = GetProductList();
+
+            Product productObjIdIs12 = products.First(p => p.ProductID == 12);
+
+            Console.WriteLine("ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                productObjIdIs12.ProductID, productObjIdIs12.ProductName, productObjIdIs12.Category, productObjIdIs12.UnitPrice, productObjIdIs12.UnitsInStock);
+        }
     }
 }
