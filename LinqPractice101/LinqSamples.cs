@@ -1300,5 +1300,14 @@ namespace LinqPractice101
             string startsWithO = strings.First(s => s[0] == 'o');
             Console.WriteLine("A string starting with 'o':{0}", startsWithO);
         }
+
+        [Description("This sample uses FirstOrDefault to try to return the first element of the sequence, unless there are no elements, in which case the default value for that type is returned.")]
+        public void Linq60()
+        {
+            int[] nubmers = { };
+            int firstNUmberOrDefault = nubmers.FirstOrDefault();
+
+            Console.WriteLine(firstNUmberOrDefault);
+        }
     }
 }
