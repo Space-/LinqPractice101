@@ -1291,5 +1291,14 @@ namespace LinqPractice101
             Console.WriteLine("ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
                 productObjIdIs12.ProductID, productObjIdIs12.ProductName, productObjIdIs12.Category, productObjIdIs12.UnitPrice, productObjIdIs12.UnitsInStock);
         }
+
+        [Description("This sample uses First to find the first element in the array that starts with 'o'.")]
+        public void Linq59()
+        {
+            string[] strings = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            string startsWithO = strings.First(s => s[0] == 'o');
+            Console.WriteLine("A string starting with 'o':{0}", startsWithO);
+        }
     }
 }
