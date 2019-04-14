@@ -1302,12 +1302,22 @@ namespace LinqPractice101
         }
 
         [Description("This sample uses FirstOrDefault to try to return the first element of the sequence, unless there are no elements, in which case the default value for that type is returned.")]
-        public void Linq60()
+        public void Linq61()
         {
             int[] nubmers = { };
             int firstNUmberOrDefault = nubmers.FirstOrDefault();
 
             Console.WriteLine(firstNUmberOrDefault);
+        }
+
+        [Description("This sample uses FirstOrDefault to return the first product whose ProductID is 789 as a single Product object, unless there is no match, in which case null is returned.")]
+        public void Linq62()
+        {
+            var products = GetProductList();
+            Product product789 = products.FirstOrDefault(p => p.ProductID == 789);
+            bool isProductExists = product789 != null;
+
+            Console.WriteLine("Product 789 exists:{0}", isProductExists);
         }
     }
 }
