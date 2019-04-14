@@ -1325,9 +1325,28 @@ namespace LinqPractice101
         {
             int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
 
-            var secondNumGreaterThanFive = numbers.Where(n => n > 5).ElementAt(1);
+            //way1
+            //            try
+            //            {
+            //                var numGreaterThanFiveArray = numbers.Where(n => n > 5).Select(n => n).ToArray();
+            //                var secondNumGreaterThanFive = numGreaterThanFiveArray[1];
+            //                Console.WriteLine("Second number greater than 5 is: {0}", secondNumGreaterThanFive);
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                Console.WriteLine(e);
+            //            }
 
-            Console.WriteLine("Second number greater than 5 is: {0}", secondNumGreaterThanFive);
+            //way2
+            try
+            {
+                var secondNumGreaterThanFive = numbers.Where(n => n > 5).ElementAt(1);
+                Console.WriteLine("Second number greater than 5 is: {0}", secondNumGreaterThanFive);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
