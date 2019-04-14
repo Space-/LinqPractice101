@@ -1319,5 +1319,15 @@ namespace LinqPractice101
 
             Console.WriteLine("Product 789 exists:{0}", isProductExists);
         }
+
+        [Description("This sample uses ElementAt to retrieve the second number greater than 5 from an array.")]
+        public void Linq64()
+        {
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            var secondNumGreaterThanFive = numbers.Where(n => n > 5).ElementAt(1);
+
+            Console.WriteLine("Second number greater than 5 is: {0}", secondNumGreaterThanFive);
+        }
     }
 }
