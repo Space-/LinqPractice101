@@ -107,9 +107,15 @@ namespace LinqPractice101
             //            samples.Linq59();
             //            samples.Linq61();
             //            samples.Linq62();
-            samples.Linq64();
+            //            samples.Linq64();
 
             #endregion Element Operators
+
+            #region Generation Operators
+
+            samples.Linq65();
+
+            #endregion Generation Operators
 
             Console.ReadKey();
         }

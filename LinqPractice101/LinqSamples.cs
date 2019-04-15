@@ -1348,5 +1348,17 @@ namespace LinqPractice101
                 Console.WriteLine(e);
             }
         }
+
+        [Description("This sample uses Range to generate a sequence of numbers from 100 to 110 that is used to find which numbers in that range are odd and even.")]
+        public void Linq65()
+        {
+            //            var numbers =
+            //                from n in Enumerable.Range(100, 11)
+            //                select new { Number = n, OddEven = n % 2 == 1 ? "odd" : "even" };
+
+            var numbers = Enumerable.Range(100, 11).Select(n => new { Number = n, OddEven = n % 2 == 1 ? "odd" : "even" });
+
+            numbers.ToList().ForEach(n => Console.WriteLine("The number {0} is {1}", n.Number, n.OddEven));
+        }
     }
 }
