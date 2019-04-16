@@ -1360,5 +1360,20 @@ namespace LinqPractice101
 
             numbers.ToList().ForEach(n => Console.WriteLine("The number {0} is {1}", n.Number, n.OddEven));
         }
+
+        [Description("This sample uses Repeat to generate a sequence that contains the number 7 ten times.")]
+        public void Linq66()
+        {
+            var numbers = Enumerable.Repeat(7, 10);
+            numbers.ToList().ForEach(Console.WriteLine);
+        }
+
+        [Description("This sample uses 'Any' to determine if any of the words in the array contain the substring 'ei'")]
+        public void Linq67()
+        {
+            var words = new[] { "car", "apple", "receipt", "field" };
+            var isExistEi = words.Any(w => w.Contains("ei"));
+            Console.WriteLine("There is a word that contains in the list that contains 'ei':{0}", isExistEi);
+        }
     }
 }

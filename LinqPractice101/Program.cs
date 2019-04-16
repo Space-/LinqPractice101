@@ -113,9 +113,16 @@ namespace LinqPractice101
 
             #region Generation Operators
 
-            samples.Linq65();
+            //            samples.Linq65();
+            //            samples.Linq66();
 
             #endregion Generation Operators
+
+            #region Quantifiers
+
+            samples.Linq67();
+
+            #endregion Quantifiers
 
             Console.ReadKey();
         }
