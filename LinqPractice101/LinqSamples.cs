@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -1413,6 +1414,29 @@ namespace LinqPractice101
 
             Console.WriteLine("numbers: {0}", string.Join(",", numbers.Select(x => x.ToString())));
             Console.WriteLine("The list contains only odd numbers: {0}", isAllOdd);
+        }
+
+        [Description("This sample uses All to return a grouped a list of products only for categories that have all of their products in stock.")]
+        public void Linq72()
+        {
+            var products = GetProductList();
+
+            var productGroups =
+                from p in products
+                group p by p.Category
+                into g
+                where g.All(p => p.UnitsInStock > 0)
+                select new { Category = g.Key, Product = g };
+
+            foreach (var productGroup in productGroups)
+            {
+                Console.WriteLine("Category={0} Products=...", productGroup.Category);
+                foreach (var p in productGroup.Product)
+                {
+                    Console.WriteLine("ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                        p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+                }
+            }
         }
     }
 }
