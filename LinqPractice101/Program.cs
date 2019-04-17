@@ -121,7 +121,8 @@ namespace LinqPractice101
             #region Quantifiers
 
             //            samples.Linq67();
-            samples.Linq69();
+            //            samples.Linq69();
+            samples.Linq70();
 
             #endregion Quantifiers
 

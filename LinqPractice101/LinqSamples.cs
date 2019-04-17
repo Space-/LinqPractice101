@@ -1404,5 +1404,15 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses All to determine whether an array contains only odd numbers.")]
+        public void Linq70()
+        {
+            var numbers = new[] { 1, 11, 3, 19, 41, 65, 19 };
+            var isAllOdd = numbers.All(n => n % 2 == 1);
+
+            Console.WriteLine("numbers: {0}", string.Join(",", numbers.Select(x => x.ToString())));
+            Console.WriteLine("The list contains only odd numbers: {0}", isAllOdd);
+        }
     }
 }
