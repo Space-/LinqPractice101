@@ -1375,5 +1375,34 @@ namespace LinqPractice101
             var isExistEi = words.Any(w => w.Contains("ei"));
             Console.WriteLine("There is a word that contains in the list that contains 'ei':{0}", isExistEi);
         }
+
+        [Description("This sample uses Any to return a grouped a list of products only for categories that have at least one product that is out of stock.")]
+        public void Linq69()
+        {
+            var products = GetProductList();
+
+            // way1
+            //            var productGroups =
+            //                from p in products
+            //                group p by p.Category
+            //                into g
+            //                where g.Any(p => p.UnitsInStock == 0)
+            //                select new { Category = g.Key, Product = g };
+
+            // way2
+            var productGroups = products.GroupBy(p => p.Category)
+                .Where(g => g.Any(p => p.UnitsInStock == 0))
+                .Select(p => new { Category = p.Key, Product = p });
+
+            foreach (var productGroup in productGroups)
+            {
+                Console.WriteLine("Category={0} Products=...", productGroup.Category);
+                foreach (var p in productGroup.Product)
+                {
+                    Console.WriteLine("ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                        p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+                }
+            }
+        }
     }
 }
