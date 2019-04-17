@@ -1438,5 +1438,13 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses Count to get how many different numbers in array.")]
+        public void Linq73()
+        {
+            var numbers = new[] { 1, 2, 4, 3, 1, 3 };
+            var numOfDifferentNumbers = numbers.Distinct().Count();
+            Console.WriteLine("There are {0} different number(s) in array.", numOfDifferentNumbers);
+        }
     }
 }
