@@ -1455,5 +1455,14 @@ namespace LinqPractice101
 
             Console.WriteLine("There are {0} odd numbers in the list", amountOfOddNumbers);
         }
+
+        [Description("This sample uses Count to return a list of customers and how many orders each has.")]
+        public void Linq76()
+        {
+            var customers = GetCustomerList();
+            var orderCounts = customers.Select(c => new { c.CustomerID, OrderCount = c.Orders.Length });
+
+            orderCounts.ToList().ForEach(c => Console.WriteLine("CustomerID={0} OrderCount={1}", c.CustomerID, c.OrderCount));
+        }
     }
 }
