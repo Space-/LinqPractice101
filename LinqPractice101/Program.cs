@@ -129,7 +129,8 @@ namespace LinqPractice101
 
             #region Aggregate Operators
 
-            samples.Linq73();
+            //            samples.Linq73();
+            samples.Linq74();
 
             #endregion Aggregate Operators
 

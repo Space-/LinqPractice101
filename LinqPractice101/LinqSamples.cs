@@ -1446,5 +1446,14 @@ namespace LinqPractice101
             var numOfDifferentNumbers = numbers.Distinct().Count();
             Console.WriteLine("There are {0} different number(s) in array.", numOfDifferentNumbers);
         }
+
+        [Description("This sample uses Count to get the number of odd ints in the array.")]
+        public void Linq74()
+        {
+            var numbers = new int[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var amountOfOddNumbers = numbers.Count(n => n % 2 == 1);
+
+            Console.WriteLine("There are {0} odd numbers in the list", amountOfOddNumbers);
+        }
     }
 }
