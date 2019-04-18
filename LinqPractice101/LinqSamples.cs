@@ -1464,5 +1464,14 @@ namespace LinqPractice101
 
             orderCounts.ToList().ForEach(c => Console.WriteLine("CustomerID={0} OrderCount={1}", c.CustomerID, c.OrderCount));
         }
+
+        [Description("This sample uses Count to return a list of categories and how many products each has.")]
+        public void Linq77()
+        {
+            var products = GetProductList();
+            var productCategory = products.GroupBy(p => p.Category).Select(p => new { Category = p.Key, ProductCount = p.Count() });
+
+            productCategory.ToList().ForEach(p => Console.WriteLine("Category={0} ProductCount={1}", p.Category, p.ProductCount));
+        }
     }
 }
