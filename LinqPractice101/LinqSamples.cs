@@ -1481,5 +1481,14 @@ namespace LinqPractice101
             var numSum = numbers.Sum();
             Console.WriteLine("The sum of the numbers is {0}.", numSum);
         }
+
+        [Description("This sample uses Sum to get the total number of characters of all words in the array.")]
+        public void Linq79()
+        {
+            var words = new[] { "cherry", "apple", "blueberry" };
+            var totoalCharsCount = words.Sum(w => w.Length);
+
+            Console.WriteLine("There are a total of {0} charters in these words", totoalCharsCount);
+        }
     }
 }
