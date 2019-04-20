@@ -1490,5 +1490,15 @@ namespace LinqPractice101
 
             Console.WriteLine("There are a total of {0} charters in these words", totoalCharsCount);
         }
+
+        [Description("This sample uses Sum to get the total units in stock for each product category.")]
+        public void Linq80()
+        {
+            var products = GetProductList();
+
+            var categories = products.GroupBy(p => p.Category).Select(g => new { Category = g.Key, TotalUnitsInStock = g.Sum(p => p.UnitsInStock) });
+
+            categories.ToList().ForEach(p => Console.WriteLine("Category={0} ProductCount={1}", p.Category, p.TotalUnitsInStock));
+        }
     }
 }
