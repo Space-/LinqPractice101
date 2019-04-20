@@ -1500,5 +1500,14 @@ namespace LinqPractice101
 
             categories.ToList().ForEach(p => Console.WriteLine("Category={0} ProductCount={1}", p.Category, p.TotalUnitsInStock));
         }
+
+        [Description("This sample uses Min to get the lowest number in an array.")]
+        public void Linq81()
+        {
+            var numbers = new[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var minNumber = numbers.Min();
+
+            Console.WriteLine("The minimum number in this array is {0}.", minNumber);
+        }
     }
 }
