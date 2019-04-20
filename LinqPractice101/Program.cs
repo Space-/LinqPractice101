@@ -137,7 +137,8 @@ namespace LinqPractice101
             //            samples.Linq79();
             //            samples.Linq80();
             //            samples.Linq81();
-            samples.Linq82();
+            //            samples.Linq82();
+            samples.Linq83();
 
             #endregion Aggregate Operators
 

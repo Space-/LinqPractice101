@@ -1517,5 +1517,14 @@ namespace LinqPractice101
             var shortedWord = words.Min(w => w.Length);
             Console.WriteLine("The shortest word is {0} characters long.", shortedWord);
         }
+
+        [Description("This sample uses Min to get the cheapest price among each category;s products.")]
+        public void Linq83()
+        {
+            var products = GetProductList();
+            var categories = products.GroupBy(g=>g.Category).Select(g => new {Category = g.Key, CheapestPrice = g.Min(p=>p.UnitPrice)});
+
+            categories.ToList().ForEach(p => Console.WriteLine("Category={0} ProductCount={1}", p.Category, p.CheapestPrice));
+        }
     }
 }
