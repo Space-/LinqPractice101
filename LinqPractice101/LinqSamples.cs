@@ -1509,5 +1509,13 @@ namespace LinqPractice101
 
             Console.WriteLine("The minimum number in this array is {0}.", minNumber);
         }
+
+        [Description("This sample uses Min to get the length of the shortest word in an array.")]
+        public void Linq82()
+        {
+            var words = new[] { "cherry", "apple", "blueberry" };
+            var shortedWord = words.Min(w => w.Length);
+            Console.WriteLine("The shortest word is {0} characters long.", shortedWord);
+        }
     }
 }
