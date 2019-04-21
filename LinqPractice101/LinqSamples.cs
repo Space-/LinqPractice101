@@ -1522,9 +1522,28 @@ namespace LinqPractice101
         public void Linq83()
         {
             var products = GetProductList();
-            var categories = products.GroupBy(g=>g.Category).Select(g => new {Category = g.Key, CheapestPrice = g.Min(p=>p.UnitPrice)});
+            var categories = products.GroupBy(g => g.Category).Select(g => new { Category = g.Key, CheapestPrice = g.Min(p => p.UnitPrice) });
 
             categories.ToList().ForEach(p => Console.WriteLine("Category={0} ProductCount={1}", p.Category, p.CheapestPrice));
+        }
+
+        [Description("This sample uses Min to get the products with the cheapest price in each category.")]
+        public void Linq84()
+        {
+            var products = GetProductList();
+            var productGroups = products.GroupBy(g => g.Category)
+                            .Select(g => new { g, minPrice = g.Min(p => p.UnitPrice) })
+                            .Select(t => new { Category = t.g.Key, CheapestProducts = t.g.Where(p => t.minPrice == p.UnitPrice) });
+
+            foreach (var productGroup in productGroups)
+            {
+                Console.WriteLine("Category={0} CheapestProducts=...", productGroup.Category);
+                foreach (var p in productGroup.CheapestProducts)
+                {
+                    Console.WriteLine("CheapestProducts: ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                        p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+                }
+            }
         }
     }
 }
