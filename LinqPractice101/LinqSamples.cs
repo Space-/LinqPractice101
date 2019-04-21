@@ -1545,5 +1545,13 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses Max to get the highest number in an array.")]
+        public void Linq85()
+        {
+            var numbers = new[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var maxNum = numbers.Max();
+            Console.WriteLine("The maximum number is {0}.", maxNum);
+        }
     }
 }
