@@ -1600,5 +1600,14 @@ namespace LinqPractice101
 
             Console.WriteLine("The average of array is {0}", numberAverage);
         }
+
+        [Description("This sample uses Average to get the average length of the words in the array.")]
+        public void Linq90()
+        {
+            var words = new[] { "cherry", "apple", "blueberry" };
+            var averageLength = words.Average(w => w.Length);
+
+            Console.WriteLine("The average word length is {0} characters", averageLength);
+        }
     }
 }
