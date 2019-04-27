@@ -1553,5 +1553,14 @@ namespace LinqPractice101
             var maxNum = numbers.Max();
             Console.WriteLine("The maximum number is {0}.", maxNum);
         }
+
+        [Description("This sample uses Max to get the length of the longest word in an array.")]
+        public void Linq86()
+        {
+            string[] words = { "cherry", "apple", "blueberry" };
+            var longestLength = words.Max(w => w.Length);
+
+            Console.WriteLine("The longest word is {0} characters long.", longestLength);
+        }
     }
 }
