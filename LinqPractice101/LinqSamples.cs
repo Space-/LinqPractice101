@@ -1591,5 +1591,14 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("This sample uses Average to get the average of all numbers in an array.")]
+        public void Linq89()
+        {
+            var numbers = new[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var numberAverage = numbers.Average();
+
+            Console.WriteLine("The average of array is {0}", numberAverage);
+        }
     }
 }
