@@ -1609,5 +1609,14 @@ namespace LinqPractice101
 
             Console.WriteLine("The average word length is {0} characters", averageLength);
         }
+
+        [Description("This sample uses Average to get the average price of each category's products.")]
+        public void Linq91()
+        {
+            var products = GetProductList();
+            var averagePriceCategory = products.GroupBy(p => p.Category).Select(g => new { Category = g.Key, AveragePrice = g.Average(p => p.UnitPrice) });
+
+            averagePriceCategory.ToList().ForEach(c => Console.WriteLine("Category={0} AveragePrice={1}", c.Category, c.AveragePrice));
+        }
     }
 }
