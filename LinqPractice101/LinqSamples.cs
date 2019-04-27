@@ -1562,5 +1562,15 @@ namespace LinqPractice101
 
             Console.WriteLine("The longest word is {0} characters long.", longestLength);
         }
+
+        [Description("This sample uses Max to get the most expensive price among each category's products.")]
+        public void Linq87()
+        {
+            var products = GetProductList();
+            var mostExpensiveCategory = products.GroupBy(p => p.Category)
+                .Select(g => new { Category = g.Key, MostExpensivePrice = g.Max(p => p.UnitPrice) });
+
+            mostExpensiveCategory.ToList().ForEach(c => Console.WriteLine("Category={0} MostExpensivePrice={1}", c.Category, c.MostExpensivePrice));
+        }
     }
 }
