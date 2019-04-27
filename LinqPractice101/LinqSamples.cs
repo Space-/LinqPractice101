@@ -1572,5 +1572,24 @@ namespace LinqPractice101
 
             mostExpensiveCategory.ToList().ForEach(c => Console.WriteLine("Category={0} MostExpensivePrice={1}", c.Category, c.MostExpensivePrice));
         }
+
+        [Description("This sample uses Max to get the products with the most expensive price in each category.")]
+        public void Linq88()
+        {
+            var products = GetProductList();
+            var categoriesWithMostExpensiveProduct = products.GroupBy(p => p.Category)
+                                                        .Select(g => new { g, maxPrice = g.Max(p => p.UnitPrice) })
+                                                        .Select(t => new { Category = t.g.Key, MostExpensivePrice = t.g.Where(p => p.UnitPrice == t.maxPrice) });
+
+            foreach (var mostExpensiveProducts in categoriesWithMostExpensiveProduct)
+            {
+                Console.WriteLine("Category={0} MostExpensiveProducts=...", mostExpensiveProducts.Category);
+                foreach (var p in mostExpensiveProducts.MostExpensivePrice)
+                {
+                    Console.WriteLine("MostExpensiveProducts:ProductID= {0} ProductName={1} Category={2} UnitPrice={3} UnitsInStock={4}",
+                        p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock);
+                }
+            }
+        }
     }
 }
