@@ -1634,8 +1634,12 @@ namespace LinqPractice101
             const int startBalance = 100;
             var attemptedWithdrawals = new[] { 20, 10, 40, 50, 10, 70, 30 };
 
-            var endBalance = attemptedWithdrawals.Aggregate(startBalance, ((balance, nextWithdrawal) =>
-                        (nextWithdrawal <= balance) ? (balance - nextWithdrawal) : balance));
+            var endBalance = attemptedWithdrawals.Aggregate(startBalance, (currentBalance, nextWithdrawal) =>
+            {
+                var canWithdrawal = nextWithdrawal <= currentBalance;
+                var postWithdrawalBalance = currentBalance - nextWithdrawal;
+                return canWithdrawal ? postWithdrawalBalance : currentBalance;
+            });
 
             Console.WriteLine("Ending balance: {0}", endBalance);
         }
