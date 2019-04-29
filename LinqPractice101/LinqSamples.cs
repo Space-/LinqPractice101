@@ -1627,5 +1627,17 @@ namespace LinqPractice101
 
             Console.WriteLine("Total product of all numbers: {0}", digitsSum);
         }
+
+        [Description("This sample uses Aggregate to create a running account balance that subtracts each withdrawal from the initial balance of 100, as long as the balance never drops below 0.")]
+        public void Linq93()
+        {
+            const int startBalance = 100;
+            var attemptedWithdrawals = new[] { 20, 10, 40, 50, 10, 70, 30 };
+
+            var endBalance = attemptedWithdrawals.Aggregate(startBalance, ((balance, nextWithdrawal) =>
+                        (nextWithdrawal <= balance) ? (balance - nextWithdrawal) : balance));
+
+            Console.WriteLine("Ending balance: {0}", endBalance);
+        }
     }
 }
