@@ -1618,5 +1618,14 @@ namespace LinqPractice101
 
             averagePriceCategory.ToList().ForEach(c => Console.WriteLine("Category={0} AveragePrice={1}", c.Category, c.AveragePrice));
         }
+
+        [Description("This sample uses Aggregate to create a running product on the array that calculates the total product of all elements.")]
+        public void Linq92()
+        {
+            var digits = new[] { 1, 2, 3 };
+            var digitsSum = digits.Aggregate((number, nextNumber) => number + nextNumber);
+
+            Console.WriteLine("Total product of all numbers: {0}", digitsSum);
+        }
     }
 }
