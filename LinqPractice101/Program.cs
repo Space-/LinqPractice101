@@ -154,8 +154,9 @@ namespace LinqPractice101
 
             #region Miscellaneous Operators
 
-            samples.Linq94();
-            samples.Linq95();
+            //            samples.Linq94();
+            //            samples.Linq95();
+            samples.Linq96();
 
             #endregion Miscellaneous Operators
 

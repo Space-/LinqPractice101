@@ -1684,5 +1684,16 @@ namespace LinqPractice101
                 Console.WriteLine(names);
             }
         }
+
+        [Description("This sample uses EqualAll to see if two sequences match on all elements in the same order.")]
+        public void Linq96()
+        {
+            var wordsA = new[] { "cherry", "apple", "blueberry" };
+            var wordsB = new[] { "cherry", "apple", "blueberry" };
+
+            bool isTwoArraySame = wordsA.SequenceEqual(wordsB);
+
+            Console.WriteLine("Is two array equal: {0}", isTwoArraySame);
+        }
     }
 }
