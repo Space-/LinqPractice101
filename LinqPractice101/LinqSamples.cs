@@ -1647,16 +1647,31 @@ namespace LinqPractice101
         [Description("This sample uses Concat to create one sequence that contains each array's values, one after the other.")]
         public void Linq94()
         {
+            // way1
             var firstNumberArray = new[] { 0, 2, 4, 5, 6, 8, 9 };
             var secondNumberArray = new[] { 1, 3, 5, 7, 8 };
-
             var containAllNumbersArray = firstNumberArray.Concat(secondNumberArray);
+
+
+            // way2
+            // var intArray = new List<int[]>
+            // {
+            //     new[] {0, 2, 4, 5, 6, 8, 9},
+            //     new[] {1, 3, 5, 7, 8}
+            // };
+
+            // var containAllNumbersArray = intArray[0].Concat(intArray[1]);
 
             Console.WriteLine("All numbers from both arrays:");
             foreach (var n in containAllNumbersArray)
             {
                 Console.WriteLine(n);
             }
+
+        }
+
+        public void Linq95()
+        {
         }
     }
 }
