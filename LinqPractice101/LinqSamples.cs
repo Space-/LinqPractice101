@@ -1652,7 +1652,6 @@ namespace LinqPractice101
             var secondNumberArray = new[] { 1, 3, 5, 7, 8 };
             var containAllNumbersArray = firstNumberArray.Concat(secondNumberArray);
 
-
             // way2
             // var intArray = new List<int[]>
             // {
@@ -1667,11 +1666,23 @@ namespace LinqPractice101
             {
                 Console.WriteLine(n);
             }
-
         }
 
         public void Linq95()
         {
+            var customers = GetCustomerList();
+            var products = GetProductList();
+
+            var customerNames = customers.Select(c => c.CompanyName);
+            var productNames = products.Select(p => p.ProductName);
+
+            var customerAndProductNames = customerNames.Concat(productNames);
+
+            Console.WriteLine("Customer and product names:");
+            foreach (var names in customerAndProductNames)
+            {
+                Console.WriteLine(names);
+            }
         }
     }
 }
