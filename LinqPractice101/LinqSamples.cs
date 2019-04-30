@@ -1643,5 +1643,20 @@ namespace LinqPractice101
 
             Console.WriteLine("Ending balance: {0}", endBalance);
         }
+
+        [Description("This sample uses Concat to create one sequence that contains each array's values, one after the other.")]
+        public void Linq94()
+        {
+            var firstNumberArray = new[] { 0, 2, 4, 5, 6, 8, 9 };
+            var secondNumberArray = new[] { 1, 3, 5, 7, 8 };
+
+            var containAllNumbersArray = firstNumberArray.Concat(secondNumberArray);
+
+            Console.WriteLine("All numbers from both arrays:");
+            foreach (var n in containAllNumbersArray)
+            {
+                Console.WriteLine(n);
+            }
+        }
     }
 }

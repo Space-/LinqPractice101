@@ -148,9 +148,15 @@ namespace LinqPractice101
             //            samples.Linq90();
             //            samples.Linq91();
             //            samples.Linq92();
-            samples.Linq93();
+            //            samples.Linq93();
 
             #endregion Aggregate Operators
+
+            #region Miscellaneous Operators
+
+            samples.Linq94();
+
+            #endregion Miscellaneous Operators
 
             Console.ReadKey();
         }
