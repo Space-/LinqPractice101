@@ -157,9 +157,15 @@ namespace LinqPractice101
             //            samples.Linq94();
             //            samples.Linq95();
             //            samples.Linq96();
-            samples.Linq97();
+            //            samples.Linq97();
 
             #endregion Miscellaneous Operators
+
+            #region Custom Sequence Operators
+
+            samples.Linq98();
+
+            #endregion Custom Sequence Operators
 
             Console.ReadKey();
         }
