@@ -1730,5 +1730,17 @@ namespace LinqPractice101
         //                }
         //            }
         //        }
+
+        public void Linq99()
+        {
+            var numbers = new[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var i = 0;
+            var sequence = numbers.Select(n => ++i);
+
+            foreach (var v in sequence)
+            {
+                Console.WriteLine("v = {0}, i = {1}", v, i);
+            }
+        }
     }
 }

@@ -167,6 +167,12 @@ namespace LinqPractice101
 
             #endregion Custom Sequence Operators
 
+            #region Query Execution
+
+            samples.Linq99();
+
+            #endregion Query Execution
+
             Console.ReadKey();
         }
     }
