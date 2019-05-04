@@ -163,7 +163,7 @@ namespace LinqPractice101
 
             #region Custom Sequence Operators
 
-            samples.Linq98();
+            //            samples.Linq98();
 
             #endregion Custom Sequence Operators
 
