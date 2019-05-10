@@ -1766,5 +1766,35 @@ namespace LinqPractice101
                 Console.WriteLine("v = {0}, i = {1}", v, i);
             }
         }
+
+        [Description("The following sample shows how, because of deferred execution, queries can be used again after data changes and will then operate on the new data.")]
+        public void Linq101()
+        {
+            // Deferred execution lets us define a query once
+            // and then reuse it later after data changes.
+            var numbers = new[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            var numbersLessOrEqualThree = numbers.Where(n => n <= 3);
+
+            Console.WriteLine("Numbers less or equal to three:");
+            foreach (var n in numbersLessOrEqualThree)
+            {
+                Console.WriteLine(n);
+            }
+
+            // let number to be negative
+            for (var i = 0; i < numbers.Length; i++)
+            {
+                numbers[i] = -numbers[i];
+            }
+
+            // During this second run, the same query object,
+            // lowNumbers, will be iterating over the new state
+            // of numbers[], producing different results:
+            Console.WriteLine("now in \"numbersLessOrEqualThree\" is:");
+            foreach (var n in numbersLessOrEqualThree)
+            {
+                Console.WriteLine(n);
+            }
+        }
     }
 }
