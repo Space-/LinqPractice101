@@ -1733,11 +1733,35 @@ namespace LinqPractice101
 
         public void Linq99()
         {
+            // Sequence operators form first-class queries that
+            // are not executed until you enumerate over them.
             var numbers = new[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
             var i = 0;
             var sequence = numbers.Select(n => ++i);
 
+            // Note, the local variable 'i' is not incremented
+            // until each element is evaluated (as a side-effect):
             foreach (var v in sequence)
+            {
+                Console.WriteLine("v = {0}, i = {1}", v, i);
+            }
+        }
+
+        // the execution result is different with https://code.msdn.microsoft.com/LINQ-Query-Execution-ce0d3b95
+        [Description("The following sample shows how queries can be executed immediately with operators such as ToList().")]
+        public void Linq100()
+        {
+            // Methods like ToList() cause the query to be
+            // executed immediately, caching the results.
+
+            var numbers = new int[] { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+
+            var i = 0;
+            var q = numbers.Select(n => ++i).ToList();
+
+            // The local variable i has already been fully
+            // incremented before we iterate the results:
+            foreach (var v in q)
             {
                 Console.WriteLine("v = {0}, i = {1}", v, i);
             }

@@ -169,7 +169,8 @@ namespace LinqPractice101
 
             #region Query Execution
 
-            samples.Linq99();
+            //            samples.Linq99();
+            samples.Linq100();
 
             #endregion Query Execution
 
