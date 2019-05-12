@@ -177,7 +177,8 @@ namespace LinqPractice101
 
             #region Join Operators
 
-            samples.Linq102();
+            //            samples.Linq102();
+            samples.Linq103();
 
             #endregion Join Operators
 

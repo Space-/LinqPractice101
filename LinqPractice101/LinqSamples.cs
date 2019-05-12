@@ -1815,5 +1815,29 @@ namespace LinqPractice101
                 Console.WriteLine("{0}: {1}", v.ProductName, v.Category);
             }
         }
+
+        [Description("Using a group join you can get all the products that match a given category bundled as a sequence.")]
+        public void Linq103()
+        {
+            var categories = new[] { "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" };
+            var products = GetProductList();
+
+            // way1
+            //            var query = from c in categories
+            //                join p in products on c equals p.Category into ps
+            //                select new { Category = c, Products = ps };
+
+            // wat2
+            var query = categories.GroupJoin(products, c => c, p => p.Category, (c, ps) => new { Category = c, Products = ps });
+
+            foreach (var v in query)
+            {
+                Console.WriteLine(v.Category + "");
+                foreach (var p in v.Products)
+                {
+                    Console.WriteLine("   " + p.ProductName);
+                }
+            }
+        }
     }
 }
