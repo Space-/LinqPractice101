@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Xml.Linq;
 
 namespace LinqPractice101
@@ -1794,6 +1792,23 @@ namespace LinqPractice101
             foreach (var n in numbersLessOrEqualThree)
             {
                 Console.WriteLine(n);
+            }
+        }
+
+        [Description("This sample shows how to efficiently join elements of two sequences based on equality between key expressions over the two.")]
+        public void Linq102()
+        {
+            var categories = new[] { "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" };
+            var products = GetProductList();
+
+            var query = from c in categories
+                        join p in products on c equals p.Category
+                        select new { Category = c, p.ProductName };
+
+            Console.WriteLine("=== Product: Category ===");
+            foreach (var v in query)
+            {
+                Console.WriteLine("{0}: {1}", v.ProductName, v.Category);
             }
         }
     }

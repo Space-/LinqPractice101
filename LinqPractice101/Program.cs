@@ -171,9 +171,15 @@ namespace LinqPractice101
 
             //            samples.Linq99();
             //            samples.Linq100();
-            samples.Linq101();
+            //            samples.Linq101();
 
             #endregion Query Execution
+
+            #region Join Operators
+
+            samples.Linq102();
+
+            #endregion Join Operators
 
             Console.ReadKey();
         }
