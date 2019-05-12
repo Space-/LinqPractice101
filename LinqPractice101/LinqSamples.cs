@@ -1801,9 +1801,13 @@ namespace LinqPractice101
             var categories = new[] { "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" };
             var products = GetProductList();
 
-            var query = from c in categories
-                        join p in products on c equals p.Category
-                        select new { Category = c, p.ProductName };
+            // way1
+            //            var query = from c in categories
+            //                join p in products on c equals p.Category
+            //                select new { Category = c, p.ProductName };
+
+            // way2
+            var query = categories.Join(products, c => c, p => p.Category, (c, p) => new { Category = c, p.ProductName });
 
             Console.WriteLine("=== Product: Category ===");
             foreach (var v in query)
