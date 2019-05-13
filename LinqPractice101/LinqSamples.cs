@@ -1839,5 +1839,26 @@ namespace LinqPractice101
                 }
             }
         }
+
+        [Description("The group join operator is more general than join, as this slightly more verbose version of the cross join sample shows.")]
+        public void Linq104()
+        {
+            var categories = new[] { "Beverages", "Condiments", "Vegetables", "Dairy Products", "Seafood" };
+            var products = GetProductList();
+
+            // way1
+            //            var query = from c in categories
+            //                join p in products on c equals p.Category into ps
+            //                from p in ps
+            //                select new { Category = c, p.ProductName };
+
+            var query = categories.GroupJoin(products, c => c, p => p.Category, (c, ps) => new { c, ps })
+                .SelectMany(@t => @t.ps, (@t, p) => new { Category = @t.c, p.ProductName });
+
+            foreach (var v in query)
+            {
+                Console.WriteLine("{0}:{1}", v.ProductName, v.Category);
+            }
+        }
     }
 }
