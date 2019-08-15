@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LinqPractice101
 {
     public static class CustomSequenceOperators
     {
-        public static IEnumerable<T> Combine<T>(this IEnumerable<int> first, IEnumerable<int> second, System.Func<int, int, T> func)
+        public static IEnumerable<T> Combine<T>(this IEnumerable<int> first, IEnumerable<int> second, Func<int, int, T> func)
         {
             using (IEnumerator<int> e1 = first.GetEnumerator(), e2 = second.GetEnumerator())
             {
