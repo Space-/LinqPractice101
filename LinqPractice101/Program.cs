@@ -163,7 +163,7 @@ namespace LinqPractice101
 
             #region Custom Sequence Operators
 
-            //            samples.Linq98();
+            samples.Linq98();
 
             #endregion Custom Sequence Operators
 
@@ -180,7 +180,7 @@ namespace LinqPractice101
             //            samples.Linq102();
             //            samples.Linq103();
             //            samples.Linq104();
-            samples.Linq105();
+            //            samples.Linq105();
 
             #endregion Join Operators
 

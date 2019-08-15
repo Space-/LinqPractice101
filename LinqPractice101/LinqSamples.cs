@@ -1705,29 +1705,26 @@ namespace LinqPractice101
             Console.WriteLine("Is two array equal: {0}", isTwoArraySame);
         }
 
-        // TODO fix this
-        //        [Description("This sample calculates the dot product of two integer vectors. It uses a user-created sequence operator, Combine, to calculate the dot product, " +
-        //                     "passing it a lambda function to multiply two arrays, element by element, and sum the result.")]
-        //        public void Linq98()
-        //        {
-        //            var vectorA = new[] { 0, 2, 4, 5, 6 };
-        //            var vectorB = new[] { 1, 3, 5, 7, 8 };
-        //
-        //            var dotProduct = vectorA.Combine(vectorB, (a, b) => a * b).Sum();
-        //
-        //            var result = vectorA.Combine(vectorB, (a, b) => a * b).Sum();
-        //        }
-        //
-        //        public static IEnumerable<int> llCombine(this EnumerableRowCollection<DataRow> first, EnumerableRowCollection<DataRow> second, Func func)
-        //        {
-        //            using (IEnumerator<DataRow> e1 = first.GetEnumerator(), e2 = second.GetEnumerator())
-        //            {
-        //                while (e1.MoveNext() && e2.MoveNext())
-        //                {
-        //                    yield return func(e1.Current, e2.Current);
-        //                }
-        //            }
-        //        }
+        /*[Description("This sample calculates the dot product of two integer vectors. It uses a user-created sequence operator, Combine, to calculate the dot product, passing it a lambda function to multiply two arrays, element by element, and sum the result.")]
+        public void Linq98()
+        {
+            int[] vectorA = { 0, 2, 4, 5, 6 };
+            int[] vectorB = { 1, 3, 5, 7, 8 };
+
+            var dotProduct = vectorA.AsEnumerable().Combine(vectorB.AsEnumerable(), (a, b) => a * b).Sum();
+
+            Console.WriteLine("Dot product: {0}", dotProduct);
+        }*/
+
+        public void Linq98()
+        {
+            var vectorA = new[] { 0, 2, 4, 5, 6 };
+            var vectorB = new[] { 1, 3, 5, 7, 8 };
+
+            var dotProduct = vectorA.Combine(vectorB, (a, b) => a * b).Sum();
+
+            Console.WriteLine("Dot product: {0}", dotProduct);
+        }
 
         public void Linq99()
         {
